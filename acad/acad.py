@@ -1,12 +1,14 @@
 import win32com.client
 import pythoncom
 from win32com.client import Dispatch, VARIANT
-qfrom pythoncom import VT_VARIANT
+from pythoncom import VT_VARIANT
 import sys
 
-acad = win32com.client.Dispatch("BricscadApp.AcadApplication")
-adoc = acad.ActiveDocument
-amodel = adoc.ModelSpace
+def start():
+    acad = win32com.client.Dispatch("BricscadApp.AcadApplication")
+    adoc = acad.ActiveDocument
+    amodel = adoc.ModelSpace
+    return [acad,adoc,amodel]
 
 def add_table(model,v):
     """
@@ -98,7 +100,7 @@ def write_table_to_temp(v):
     return s0
 
 
-def test_greek():
+def test_greek(acad):
     mtext = f"""
     ελληνικα
     """
