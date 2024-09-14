@@ -1,0 +1,100 @@
+  #+tblname: three_lines1
+| Μονάδα:                          | KDSA-3500          |
+| Μοντέλο ανεμιστήρα:              | HRSZ-280           |
+| Στροφές ανεμιστήρα (σχεδιασμού): | 3600 rpm           |
+| Τροχαλία / άξονας ΗΚ:            | 1SPA Ø250 / Ø28 mm |
+| Τροχαλία ανεμιστήρα:             | 1SPA Ø200 / Ø25 mm |
+| Στροφές ανεμιστήρα (λειτουργία): | 3600 rpm           |
+| Μοτερ:                           | 4.0kW/3ph/2850rpm  |
+| Απόσταση κέντρα:                 | 445 mm             |
+| Μήκος ιμάντα:                    | L1600 mm           |
+
+    #+begin_src lisp  :var v=three_lines1  :tangle :file c:/tmp/table.txt
+    (export_table v)
+    #+end_src
+
+    #+RESULTS:
+    : Μονάδα:	KDSA-3500PΜοντέλο ανεμιστήρα:	HRSZ-280PΣτροφές ανεμιστήρα (σχεδιασμού):	3600 rpmPΤροχαλία / άξονας ΗΚ:	1SPA Ø250 / Ø28 mmPΤροχαλία ανεμιστήρα:	1SPA Ø200 / Ø25 mmPΣτροφές ανεμιστήρα (λειτο...[sly-elided string of length 293]
+    
+
+  #+tblname: three_lines
+|                      | Στάδιο φίλτρανσης | Αρχική ονομαστική [Pa] | Αρχική @ ποσοστό παροχής  [Pa] | Τελική [Pa] |
+|----------------------+-------------------+------------------------+--------------------------------+-------------|
+|                   1. | G2 48mm           |                     20 |                             16 |         100 |
+|                   2. | G2 48mm           |                     40 |                             33 |         100 |
+|                   3. | G4 48mm           |                     40 |                             33 |         200 |
+|                   4. | F5 48mm           |                     50 |                             41 |         200 |
+|                   5. | F8 292mm          |                     80 |                             66 |         300 |
+|                   6. | H12 292mm         |                    120 |                             98 |         600 |
+|                   7. | AC/AL             |                    200 |                            164 |        164. |
+|                   8. | AC/AL             |                    200 |                            164 |         164 |
+|                   9. | ( PG 95mm)        |                    170 |                            139 |         139 |
+|----------------------+-------------------+------------------------+--------------------------------+-------------|
+| Αρχική πτώση πίεσης: |                   |                    920 |                            754 |             |
+| Τελική πτώση πίεσης: |                   |                        |                                |       1967. |
+|----------------------+-------------------+------------------------+--------------------------------+-------------|
+|   Μέση πτώση πίεσης: |                   |                        |                           1360 |             |
+
+
+    #+begin_src lisp  :var v=three_lines  :tangle :file c:/tmp/table.txt
+    (export_table v)
+    #+end_src
+
+    #+RESULTS:
+    : 	Στάδιο φίλτρανσης	Αρχική ονομαστική [Pa]	Αρχική @ ποσοστό παροχής  [Pa]	Τελική [Pa]P1	G2 48mm	20	16	100P2	G2 48mm	40	33	100P3	G4 48mm	40	33	200P4	F5 48mm	50	41	200P5	F8 292mm	80	66	300P6	H12 29...[sly-elided string of length 374]
+
+    
+
+    #+begin_src python :session org-python :var v=three_lines :tangle
+      import acad.acad
+      acad.acad.write_table_to_temp(v)
+    #+end_src
+
+    #+RESULTS:
+
+
+
+    #+begin_src emacs-lisp  :var v=three_lines :session *slime-repl sbcl*  :tangle :file c:/tmp/table.txt
+          (setq s "")
+
+          (dolist ( i v)
+            (progn
+              (setq s (concat ' s
+                                (format nil "~{~A~^	~}" i)
+                                   (format nil "\\P")
+                                   ))))
+          s
+      (setq file "c:/tmp/table.txt")
+      (with-open-file (str file
+                         :direction :output
+                         :if-exists :supersede
+                         :if-does-not-exist :create)
+        (format str s))
+      s
+    #+end_src
+
+    #+begin_src lisp  :var v=three_lines1  :tangle :file c:/tmp/table.txt
+
+    (defun export_table (v)
+          (setq s "")
+
+          (loop for i in v
+                do (progn
+                   (setq s (concatenate 'string s
+                                        (format nil "~{~A~^	~}" i)
+                                        (format nil "\\P")
+                                        ))))
+          s
+      (setq file "c:/tmp/table.txt")
+      (with-open-file (str file
+                         :direction :output
+                         :if-exists :supersede
+                         :if-does-not-exist :create)
+        (format str s))
+      s
+    )
+    #+end_src
+
+    #+RESULTS:
+    : Μονάδα:	KDSA-3500PΜοντέλο ανεμιστήρα:	HRSZ-280PΣτροφές ανεμιστήρα (σχεδιασμού):	3600 rpmPΤροχαλία / άξονας ΗΚ:	1SPA Ø250 / Ø28 mmPΤροχαλία ανεμιστήρα:	1SPA Ø200 / Ø25 mmPΣτροφές ανεμιστήρα (λειτο...[sly-elided string of length 293]
+    

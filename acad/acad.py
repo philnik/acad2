@@ -1,0 +1,133 @@
+import win32com.client
+import pythoncom
+from win32com.client import Dispatch, VARIANT
+qfrom pythoncom import VT_VARIANT
+import sys
+
+acad = win32com.client.Dispatch("BricscadApp.AcadApplication")
+adoc = acad.ActiveDocument
+amodel = adoc.ModelSpace
+
+def add_table(model,v):
+    """
+    adds table to model from double list of the form v[][]
+    """
+    h = len(v)
+    w = len(v[0])
+    l = 2.17
+    mytable = model.AddTable("0.0, 0.0",
+                             h,
+                             w,
+                             l,
+                             l*10)
+
+    res = []
+    for i in range(h):
+        row = []
+        for j in range(w):
+            print("i="+str(i))
+            value = v[i][j]
+            print(value)
+            row.append(value)
+            mytable.SetCellValue(i,
+                                 j,
+                                 str(value))
+            mytable.SetCellTextHeight(i,
+                                      j,
+                                      l)
+    res.append(row)
+    res
+    return mytable
+
+
+def work_with_ucs():
+    coord_list = [[0,0,'ucs1'],
+                  [297,0,'ucs2'],
+                  [0,210,'ucs3'],
+                  [297,210,'ucs4']]
+
+    for p in coord_list:
+        x = p[0]
+        y = p[1]
+        ucs_name = p[2]
+        c = f"{x},{y}"
+        xdir = f"{x+1},{y}"
+        ydir = f"{x},{y+1}"
+        print(c)
+        ucs1 = adoc.UserCoordinateSystems.Add(c,
+                                              xdir,
+                                              ydir,
+                                              ucs_name)
+        adoc.ActiveUCS  = ucs1
+
+def get_ucs_offset():
+    adoc = acad.ActiveDocument
+    amodel = adoc.ModelSpace
+    ucs = adoc.ActiveUCS
+    m = ucs.GetUCSMatrix()
+    return [m[0][3], m[1][3]]
+
+
+def create_new_ucs(mtext):
+    l = ['ucs1', 'ucs2', 'ucs3', 'ucs4']
+    for u in l:
+        adoc.SendCommand("ucs NA R " + u + "\n")
+        # adoc.ActiveUCS  = u
+        m = get_ucs_offset()
+        p = f"{m[0]},{m[1]}"
+        print(u+":"+str(m))
+        mo =  amodel.AddMtext(p, 500, mtext)
+        print(mo.StyleName)
+        print(mo.TextString)
+
+#work_with_ucs()
+
+def write_table_to_temp(v):
+    """
+    exports array to temp file
+    """
+    s0 = ""
+    for row in v:
+        srow = [str(i) for i in row]
+        s = '\t'.join(srow)
+        s0 = s0+s+'\n'
+    s0
+    file = open("c:/tmp/table.txt","w")
+    file.write(s0)
+    file.close()
+    return s0
+
+
+def test_greek():
+    mtext = f"""
+    ελληνικα
+    """
+    enc = sys.stdout.encoding
+    #create_new_ucs(mtext.encode('utf-8'))
+
+    adoc = acad.ActiveDocument
+    amodel = adoc.ModelSpace
+    me = mtext.encode('utf-8')
+    me = me.decode('utf-8')
+    me=mtext
+    mo =  amodel.AddMtext("0,0", 500, mtext)
+    mo =  amodel.AddMtext("500,0", 500, mtext)
+
+def newtextstyle():
+    m = adoc.TextStyles.Add("Standard")
+    m.FontFile = "Calibri Light"
+    m.Height = 2.17
+
+
+
+def change_dimensions_to_layer(layer_name):
+    command = f"""(setvar "CMDECHO" 0)
+    (setq sdim (ssget "_X" (list '(0 . "Dimension"))))
+    (repeat (setq n (sslength sdim))
+    (setq ed (entget (ssname sdim (setq n (1- n)))))
+    (setq ed (subst (cons 8 "{layer_name}") (assoc 8 ed) ed ))
+    (entmod ed)
+    )
+    (setvar "CMDECHO" 1)
+    """
+    adoc.SendCommand(command)

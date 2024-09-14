@@ -1,0 +1,3 @@
+(let ((tbl '(("0" 7 "CONTINUOUS" 15) ("DASHED" 8 "DASHED" 15) ("DIMENSION" 162 "CONTINUOUS" 15) ("STEEL" 7 "CONTINUOUS" 15) ("TEXT" 162 "CONTINUOUS" 15) ("CENTER" 1 "CENTER" 15))))
+(setq layer_table tbl)
+)

@@ -1,0 +1,27 @@
+v=[["DIMADEC", 0], ["DIMALT", 0], ["DIMALTD", 3], ["DIMALTF", 0.0393701], ["DIMALTMZF", 100], ["DIMALTMZS", ""], ["DIMALTRND", 0], ["DIMALTTD", 3], ["DIMALTTZ", 0], ["DIMALTU", 2], ["DIMALTZ", 0], ["DIMAPOST", ""], ["DIMARCSYM", 0], ["DIMASZ", 2.17], ["DIMATFIT", 3], ["DIMAUNIT", 0], ["DIMAZIN", 0], ["DIMBLK", "Arrow, filled"], ["DIMBLK1", "Arrow, filled"], ["DIMBLK2", "Arrow, filled"], ["DIMCEN", 10], ["DIMCLRD", "BYLAYER"], ["DIMCLRE", "BYLAYER"], ["DIMCLRT", "BYLAYER"], ["DIMDEC", 0], ["DIMDLE", 0], ["DIMDLI", 4], ["DIMDSEP", ","], ["DIMEXE", 0.5], ["DIMEXO", 0.5], ["DIMFRAC", 0], ["DIMFXL", 1], ["DIMFXLON", "Off"], ["DIMGAP", 0.5], ["DIMJOGANG", 90], ["DIMJUST", 0], ["DIMLDRBLK", "Arrow, filled"], ["DIMLFAC", 1], ["DIMLIM", "Off"], ["DIMLTEX1", "ByLayer"], ["DIMLTEX2", "ByLayer"], ["DIMLTYPE", "ByLayer"], ["DIMLUNIT", 2], ["DIMLWD", 15], ["DIMLWE", "BYLAYER"], ["DIMMZF", 100], ["DIMMZS", ""], ["DIMPOST", ""], ["DIMRND", 0], ["DIMSAH", "Off"], ["DIMSCALE", 20], ["DIMSD1", "Off"], ["DIMSD2", "Off"], ["DIMSE1", "Off"], ["DIMSE2", "Off"], ["DIMSOXD", "Off"], ["DIMTAD", 1], ["DIMTDEC", 0], ["DIMTFAC", 1], ["DIMTFILL", 0], ["DIMTFILLCLR", "BYBLOCK"], ["DIMTIH", "Off"], ["DIMTIX", "Off"], ["DIMTM", 0], ["DIMTMOVE", 0], ["DIMTOFL", "On"], ["DIMTOH", "Off"], ["DIMTOL", "Off"], ["DIMTOLJ", 0], ["DIMTP", 0], ["DIMTSZ", 0], ["DIMTVP", 0], ["DIMTXSTY", "Standard"], ["DIMTXT", 2.17], ["DIMTXTDIREC", "Off"], ["DIMTZIN", 8], ["DIMUPT", "Off"], ["DIMZIN", 8]]
+res = []
+for row in v:
+    var = str(row[0])
+    #val = adoc.GetVariable(var)
+    #res.append([var,val])
+#res
+adoc.SetVariable("DIMLTEX1","ByLayer")
+
+v=[["DIMADEC", 0], ["DIMALT", 0], ["DIMALTD", 3], ["DIMALTF", 0.0393701], ["DIMALTMZF", 100], ["DIMALTMZS", ""], ["DIMALTRND", 0], ["DIMALTTD", 3], ["DIMALTTZ", 0], ["DIMALTU", 2], ["DIMALTZ", 0], ["DIMAPOST", ""], ["DIMARCSYM", 0], ["DIMASZ", 2.17], ["DIMATFIT", 3], ["DIMAUNIT", 0], ["DIMAZIN", 0], ["DIMBLK", "Arrow, filled"], ["DIMBLK1", "Arrow, filled"], ["DIMBLK2", "Arrow, filled"], ["DIMCEN", 10], ["DIMCLRD", "BYLAYER"], ["DIMCLRE", "BYLAYER"], ["DIMCLRT", "BYLAYER"], ["DIMDEC", 0], ["DIMDLE", 0], ["DIMDLI", 4], ["DIMDSEP", ","], ["DIMEXE", 0.5], ["DIMEXO", 0.5], ["DIMFRAC", 0], ["DIMFXL", 1], ["DIMFXLON", "Off"], ["DIMGAP", 0.5], ["DIMJOGANG", 90], ["DIMJUST", 0], ["DIMLDRBLK", "Arrow, filled"], ["DIMLFAC", 1], ["DIMLIM", "Off"], ["DIMLTEX1", "ByLayer"], ["DIMLTEX2", "ByLayer"], ["DIMLTYPE", "ByLayer"], ["DIMLUNIT", 2], ["DIMLWD", 15], ["DIMLWE", "BYLAYER"], ["DIMMZF", 100], ["DIMMZS", ""], ["DIMPOST", ""], ["DIMRND", 0], ["DIMSAH", "Off"], ["DIMSCALE", 20], ["DIMSD1", "Off"], ["DIMSD2", "Off"], ["DIMSE1", "Off"], ["DIMSE2", "Off"], ["DIMSOXD", "Off"], ["DIMTAD", 1], ["DIMTDEC", 0], ["DIMTFAC", 1], ["DIMTFILL", 0], ["DIMTFILLCLR", "BYBLOCK"], ["DIMTIH", "Off"], ["DIMTIX", "Off"], ["DIMTM", 0], ["DIMTMOVE", 0], ["DIMTOFL", "On"], ["DIMTOH", "Off"], ["DIMTOL", "Off"], ["DIMTOLJ", 0], ["DIMTP", 0], ["DIMTSZ", 0], ["DIMTVP", 0], ["DIMTXSTY", "Standard"], ["DIMTXT", 2.17], ["DIMTXTDIREC", "Off"], ["DIMTZIN", 8], ["DIMUPT", "Off"], ["DIMZIN", 8]]
+import win32com.client
+import pythoncom
+from win32com.client import Dispatch, VARIANT
+import win32com
+acad = win32com.client.Dispatch("BricscadApp.AcadApplication")
+adoc = acad.ActiveDocument
+amodel = adoc.ModelSpace
+
+
+ns = adoc.DimStyles.Add("DIM1")
+
+for row in v:
+      print(row)
+      try: adoc.SetVariable(str(row[0]), str(row[1]))
+      except: pass
+
+ns.CopyFrom(adoc)

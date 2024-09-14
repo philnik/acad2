@@ -1,0 +1,531 @@
+
+* colors
+
+
+| background: | 215 | 239 | 234 |
+|             | 168 | 204 | 209 |
+|             |     |     |     |
+
+
+
+* select all objects
+
+Dim ssetObj As AcadSelectionSet
+ssetObj = acadDoc.SelectionSets.Add("SSET")
+
+ 
+
+Dim FilterType(3) As Short
+Dim FilterData(3) As Object
+FilterType(0) = -4
+FilterData(0) = "<or"
+FilterType(1) = 0
+FilterData(1) = "TEXT"
+FilterType(2) = 0
+FilterData(2) = "MTEXT"
+FilterType(3) = -4
+FilterData(3) = "or>"
+
+ssetObj.Select(AcSelect.acSelectionSetAll, , , FilterType, FilterData)
+
+(ssget ":L" (list '(0 . "TEXT")))
+(ssget ":L" (list '(0 . "TEXT")))
+(ssget "_X" (list '(0 . "TEXT")))
+
+(ssget "_X" (list '(0 . "Dimension")))
+
+(setq en1 (entnext))
+
+
+(setq sdim (ssget "_X" (list '(0 . "Dimension"))))
+(repeat (setq n (sslength sdim))
+      (setq en1 (entget (ssname sdim (setq n (1- n)))))
+      (setq ed (entget en1))
+      (setq ed (subst (cons 8 "0") (assoc 8 ed) ed ))
+      (entmod ed)
+      )
+
+(setq en1 (subst (cons 8 "0") (assoc 8 en1) en1 ))
+
+
+
+
+(repeat (setq n (sslength sdim))
+      (setq edata (entget (ssname ss (setq n (1- n)))))
+      (entmod
+        (append edata (list (cons 8 (cadr (assoc (strcase (cdr (assoc 8 edata))) laypairs)))))
+
+#+begin_src python :session *Python* :var v=dimstyle
+
+  command = f"""
+  (setq sdim (ssget "_X" (list '(0 . "Dimension"))))
+  (repeat (setq n (sslength sdim))
+  (setq ed (entget (ssname sdim (setq n (1- n)))))
+  (setq ed (subst (cons 8 "0") (assoc 8 ed) ed ))
+  (entmod ed)
+  )
+  """
+
+  adoc.SendCommand(command)
+
+
+#+end_src
+
+#+RESULTS:
+: None
+
+
+#+begin_src python :session *Python* :var v=dimstyle
+
+      adoc.SendCommand("""(setq stext (ssget "_X" (list '(0 . "TEXT"))))\n""")
+      adoc.SendCommand("""(setq stext (ssget "_X" (list '(0 . "MTEXT"))))\n""")
+
+      ss = adoc.SelectionSets.Add("test")
+      fType = [0]
+      fData = ["TEXT"]
+      ss.Select(acSelectionSetAll,0 ,0 , fType, fData)
+
+#+end_src
+
+#+RESULTS:
+
+
+
+
+
+* dimstyle
+
+| 256 | number is fro by layer |
+|   0 | is for Off             |
+|   1 | is for On              |
+    
+
+#+tblname: dimstyle0
+| DIMADEC     |             0 |
+| DIMALT      |             0 |
+| DIMALTD     |             3 |
+| DIMALTF     |     0.0393701 |
+| DIMALTMZF   |           100 |
+| DIMALTMZS   |               |
+| DIMALTRND   |             0 |
+| DIMALTTD    |             3 |
+| DIMALTTZ    |             0 |
+| DIMALTU     |             2 |
+| DIMALTZ     |             0 |
+| DIMAPOST    |               |
+| DIMARCSYM   |             0 |
+| DIMASZ      |          2.17 |
+| DIMATFIT    |             3 |
+| DIMAUNIT    |             0 |
+| DIMAZIN     |             0 |
+| DIMBLK      | Arrow, filled |
+| DIMBLK1     | Arrow, filled |
+| DIMBLK2     | Arrow, filled |
+| DIMCEN      |            10 |
+| DIMCLRD     |           256 |
+| DIMCLRE     |           256 |
+| DIMCLRT     |           256 |
+| DIMDEC      |             0 |
+| DIMDLE      |             0 |
+| DIMDLI      |             4 |
+| DIMDSEP     |             , |
+| DIMEXE      |           0.5 |
+| DIMEXO      |           0.5 |
+| DIMFRAC     |             0 |
+| DIMFXL      |             1 |
+| DIMFXLON    |             0 |
+| DIMGAP      |           0.5 |
+| DIMJOGANG   |            45 |
+| DIMJUST     |             0 |
+| DIMLDRBLK   | Arrow, filled |
+| DIMLFAC     |             1 |
+| DIMLIM      |             0 |
+| DIMLTEX1    |           256 |
+| DIMLTEX2    |           256 |
+| DIMLTYPE    |           256 |
+| DIMLUNIT    |             2 |
+| DIMLWD      |            15 |
+| DIMLWE      |           256 |
+| DIMMZF      |           100 |
+| DIMMZS      |               |
+| DIMPOST     |               |
+| DIMRND      |             0 |
+| DIMSAH      |             0 |
+| DIMSCALE    |            10 |
+| DIMSD1      |             0 |
+| DIMSD2      |             0 |
+| DIMSE1      |             0 |
+| DIMSE2      |             0 |
+| DIMSOXD     |             0 |
+| DIMTAD      |             1 |
+| DIMTDEC     |             0 |
+| DIMTFAC     |             1 |
+| DIMTFILL    |             0 |
+| DIMTFILLCLR |           256 |
+| DIMTIH      |             0 |
+| DIMTIX      |             0 |
+| DIMTM       |             0 |
+| DIMTMOVE    |             0 |
+| DIMTOFL     |             1 |
+| DIMTOH      |             0 |
+| DIMTOL      |             0 |
+| DIMTOLJ     |             0 |
+| DIMTP       |             0 |
+| DIMTSZ      |             0 |
+| DIMTVP      |             0 |
+| DIMTXSTY    |       CALIBRI |
+| DIMTXT      |          2.17 |
+| DIMTXTDIREC |             0 |
+| DIMTZIN     |             8 |
+| DIMUPT      |             0 |
+| DIMZIN      |             8 |
+
+#+begin_src emacs-lisp :var v=dimstyle0 :tangle add_dimstyle.lsp
+    v
+#+end_src
+
+
+(mapcar '(lambda (x)
+
+	   (setvar (car x) (cadr x))
+	   )
+	dimvars
+
+	)
+)
+
+
+    
+#+RESULTS:
+| DIMADEC     |             0 | Sets display precision for angular dimensions                     |
+| DIMALT      |             0 | Enables alternate units for dimensions                            |
+| DIMALTD     |             3 | Sets the display precision for the alternate dimension units      |
+| DIMALTF     |     0.0393701 | Scale factor for alternate units                                  |
+| DIMALTMZF   |           100 | DIMALTMZF: undocumented                                           |
+| DIMALTMZS   |               | DIMALTMZS: undocumented                                           |
+| DIMALTRND   |             0 | Specifies the roundoff rules for alternate units                  |
+| DIMALTTD    |             3 | Tolerance precision for alternate dimension units                 |
+| DIMALTTZ    |             0 | Controls zero suppression in alternate tolerance values           |
+| DIMALTU     |             2 | Specifies the alternate unit type for linear dimensions           |
+| DIMALTZ     |             0 | Controls zero suppression in alternate unit dimensions            |
+| DIMAPOST    |               | Prefix or suffix for alternate unit dimensions                    |
+| DIMARCSYM   |             0 | Controls arc symbol display in arc length dimensions              |
+| DIMASZ      |          2.17 | Specifies arrowhead size of dimension and leader lines            |
+| DIMATFIT    |             3 | Arrow and text fit                                                |
+| DIMAUNIT    |             0 | Sets angular dimensions unit type                                 |
+| DIMAZIN     |             0 | Controls zero suppression for angular dimensions                  |
+| DIMBLK      | Arrow, filled | Block to use in place of arrowheads                               |
+| DIMBLK1     | Arrow, filled | Block to replace first arrowhead                                  |
+| DIMBLK2     | Arrow, filled | Block to replace second arrowhead                                 |
+| DIMCEN      |            10 | Controls the display of center marks and center lines             |
+| DIMCLRD     |           256 | Color for dimension lines, arrowheads and leader lines            |
+| DIMCLRE     |           256 | Sets the color for dimension extension lines                      |
+| DIMCLRT     |           256 | Sets the color for dimension text                                 |
+| DIMDEC      |             0 | Sets the display precision for the primary dimension units        |
+| DIMDLE      |             0 | Length of dimension line extension beyond obliques                |
+| DIMDLI      |             4 | Spacing between dimension lines in baseline dimensions            |
+| DIMDSEP     |             , | Sets the decimal separator character                              |
+| DIMEXE      |           0.5 | Length of extension line extending past dimension                 |
+| DIMEXO      |           0.5 | Specifies the offset of extension lines from the origin points    |
+| DIMFRAC     |             0 | Fraction format for Architectural and Fractional dimensions       |
+| DIMFXL      |             1 | Specifies the fixed length of extension lines                     |
+| DIMFXLON    |             0 | Controls the generation of fixed-length extension lines           |
+| DIMGAP      |           0.5 | Gap between text and dimension lines                              |
+| DIMJOGANG   |            45 | Angle of oblique dimension line segment in jogged radius dimensio |
+| DIMJUST     |             0 | Sets the horizontal position of dimension text                    |
+| DIMLDRBLK   | Arrow, filled | Defines the arrowhead block for leaders                           |
+| DIMLFAC     |             1 | Specifies the scale factor for linear dimensions                  |
+| DIMLIM      |             0 | Sets dimensions to display as limits                              |
+| DIMLTEX1    |           256 | Specifies the linetype for the first extension line               |
+| DIMLTEX2    |           256 | Specifies the linetype for the second extension line              |
+| DIMLTYPE    |           256 | Specifies the linetype for the dimension line                     |
+| DIMLUNIT    |             2 | Specifies the primary unit type for linear dimensions             |
+| DIMLWD      |            15 | Sets the lineweight of dimension and leader lines                 |
+| DIMLWE      |           256 | Sets the lineweight of extension lines                            |
+| DIMMZF      |           100 | DIMMZF: undocumented                                              |
+| DIMMZS      |               | DIMMZS: undocumented                                              |
+| DIMPOST     |               | Prefix or suffix for dimension text                               |
+| DIMRND      |             0 | Specifies rounding rules for linear dimensions                    |
+| DIMSAH      |             0 | Controls if DIMBLK or DIMBLK1 and DIMBLK2 are used for arrowheads |
+| DIMSCALE    |            10 | Scale factor for dimension graphics                               |
+| DIMSD1      |             0 | Suppresses the first part of the dimension line                   |
+| DIMSD2      |             0 | Suppresses the second part of the dimension line                  |
+| DIMSE1      |             0 | Suppresses the first extension line                               |
+| DIMSE2      |             0 | Suppresses the second extension line                              |
+| DIMSOXD     |             0 | Suppresses dimension lines outside the extension lines            |
+| DIMTAD      |             1 | Specifies vertical position of text                               |
+| DIMTDEC     |             0 | Decimal places for tolerance values in primary dimension units    |
+| DIMTFAC     |             1 | Scale factor for tolerance text height                            |
+| DIMTFILL    |             0 | Specifies the background fill of dimension text                   |
+| DIMTFILLCLR |           256 | Background fill color for dimension text when DIMTFILL is 2       |
+| DIMTIH      |             0 | Sets text position inside extension lines aligned or horizontal   |
+| DIMTIX      |             0 | Controls if text is forced between the extension lines            |
+| DIMTM       |             0 | Defines the minimum (lower) tolerance limit                       |
+| DIMTMOVE    |             0 | Controls how dimension text can move                              |
+| DIMTOFL     |             1 | Controls if dimension lines are drawn when text is outside        |
+| DIMTOH      |             0 | Sets text outside extension lines aligned or horizontal           |
+| DIMTOL      |             0 | Sets tolerance display on or off                                  |
+| DIMTOLJ     |             0 | Sets vertical position of tolerance text                          |
+| DIMTP       |             0 | Defines the maximum (upper) tolerance limit                       |
+| DIMTSZ      |             0 | Size of oblique lines drawn in place of arrows                    |
+| DIMTVP      |             0 | Vertical position of text above or below the dimension line       |
+| DIMTXSTY    |       CALIBRI | Sets the style of the dimension text                              |
+| DIMTXT      |          2.17 | Default height of dimension text                                  |
+| DIMTXTDIREC |             0 | Reading direction of dimension text                               |
+| DIMTZIN     |             8 | Controls zero suppression in tolerance values                     |
+| DIMUPT      |             0 | Controls cursor mode for user-positioned text                     |
+| DIMZIN      |             8 | Controls zero suppression for the primary dimension unit          |
+    
+
+
+
+    
+#+begin_src python :session *Python* :var v=dimstyle0 :tangle add_dimstyle.py
+    import win32com.client
+    import pythoncom
+    from win32com.client import Dispatch, VARIANT
+    import win32com
+    acad = win32com.client.Dispatch("BricscadApp.AcadApplication")
+    adoc = acad.ActiveDocument
+    amodel = adoc.ModelSpace
+
+
+    ns = adoc.DimStyles.Add("DIM5")
+    res =[]
+    for row in v:
+        print(row)
+        myrow = [str(row[0]), str(row[1]), str(row[2])]
+        try:
+            adoc.SetVariable(str(row[0]), str(row[1]))
+        except:
+            res.append(myrow)
+
+    ns.CopyFrom(adoc)
+    res
+
+#+end_src
+
+#+RESULTS:
+
+    
+
+
+    
+#+tblname: dimstyle
+| DIMADEC     |             0 |
+| DIMALT      |             0 |
+| DIMALTD     |             3 |
+| DIMALTF     |     0.0393701 |
+| DIMALTMZF   |           100 |
+| DIMALTMZS   |               |
+| DIMALTRND   |             0 |
+| DIMALTTD    |             3 |
+| DIMALTTZ    |             0 |
+| DIMALTU     |             2 |
+| DIMALTZ     |             0 |
+| DIMAPOST    |               |
+| DIMARCSYM   |             0 |
+| DIMASZ      |          2.17 |
+| DIMATFIT    |             3 |
+| DIMAUNIT    |             0 |
+| DIMAZIN     |             0 |
+| DIMBLK      | Arrow, filled |
+| DIMBLK1     | Arrow, filled |
+| DIMBLK2     | Arrow, filled |
+| DIMCEN      |            10 |
+| DIMCLRD     |       BYLAYER |
+| DIMCLRE     |       BYLAYER |
+| DIMCLRT     |       BYLAYER |
+| DIMDEC      |             0 |
+| DIMDLE      |             0 |
+| DIMDLI      |             4 |
+| DIMDSEP     |             , |
+| DIMEXE      |           0.5 |
+| DIMEXO      |           0.5 |
+| DIMFRAC     |             0 |
+| DIMFXL      |             1 |
+| DIMFXLON    |           Off |
+| DIMGAP      |           0.5 |
+| DIMJOGANG   |            90 |
+| DIMJUST     |             0 |
+| DIMLDRBLK   | Arrow, filled |
+| DIMLFAC     |             1 |
+| DIMLIM      |           Off |
+| DIMLTEX1    |       ByLayer |
+| DIMLTEX2    |       ByLayer |
+| DIMLTYPE    |       ByLayer |
+| DIMLUNIT    |             2 |
+| DIMLWD      |            15 |
+| DIMLWE      |       BYLAYER |
+| DIMMZF      |           100 |
+| DIMMZS      |               |
+| DIMPOST     |               |
+| DIMRND      |             0 |
+| DIMSAH      |           Off |
+| DIMSCALE    |            20 |
+| DIMSD1      |           Off |
+| DIMSD2      |           Off |
+| DIMSE1      |           Off |
+| DIMSE2      |           Off |
+| DIMSOXD     |           Off |
+| DIMTAD      |             1 |
+| DIMTDEC     |             0 |
+| DIMTFAC     |             1 |
+| DIMTFILL    |             0 |
+| DIMTFILLCLR |       BYBLOCK |
+| DIMTIH      |           Off |
+| DIMTIX      |           Off |
+| DIMTM       |             0 |
+| DIMTMOVE    |             0 |
+| DIMTOFL     |            On |
+| DIMTOH      |           Off |
+| DIMTOL      |           Off |
+| DIMTOLJ     |             0 |
+| DIMTP       |             0 |
+| DIMTSZ      |             0 |
+| DIMTVP      |             0 |
+| DIMTXSTY    |      Standard |
+| DIMTXT      |          2.17 |
+| DIMTXTDIREC |           Off |
+| DIMTZIN     |             8 |
+| DIMUPT      |           Off |
+| DIMZIN      |             8 |
+
+#+begin_src python :session *Python* :var v=dimstyle :tangle p_add_dimstyle
+  res = []
+  for row in v:
+      var = str(row[0])
+      #val = adoc.GetVariable(var)
+      #res.append([var,val])
+  #res
+  adoc.SetVariable("DIMLTEX1","ByLayer")
+#+end_src
+
+#+RESULTS:
+: None
+
+#+begin_src python :session *Python* :var v=dimstyle :tangle p_add_dimstyle
+    import win32com.client
+    import pythoncom
+    from win32com.client import Dispatch, VARIANT
+    import win32com
+    acad = win32com.client.Dispatch("BricscadApp.AcadApplication")
+    adoc = acad.ActiveDocument
+    amodel = adoc.ModelSpace
+
+
+    ns = adoc.DimStyles.Add("DIM1")
+
+    for row in v:
+	  print(row)
+	  try: adoc.SetVariable(str(row[0]), str(row[1]))
+	  except: pass
+
+    ns.CopyFrom(adoc)
+
+
+#+end_src
+
+#+RESULTS:
+: None
+
+
+ns = adoc.DimStyles.Add("DIM0")
+ns.CopyFrom(adoc.ModelSpace[0])
+
+ Set newStyle2 = ThisDrawing.DimStyles.Add _
+ ("Style 2 copied from Style 1")
+    Call newStyle2.CopyFrom(ThisDrawing.DimStyles.Item _
+ ("Style 1 copied from a dim"))
+
+    Set newStyle2 = ThisDrawing.DimStyles.Add _
+ ("Style 3 copied from the running drawing values")
+    Call newStyle2.CopyFrom(ThisDrawing)
+End Sub
+
+#+begin_src python :session *Python* :var v=layer_table
+
+ns = adoc.DimStyles.Add("DIM0")
+ns.CopyFrom(adoc)
+
+  
+#+end_src
+
+#+RESULTS:
+: None
+
+
+
+
+
+
+
+
+* layer table
+
+
+
+(setq LayerList '(
+ ("CE-PAD-BNDY"		2	"HIDDEN2"	"EARTHWORKS : PAD BOUNDARY")
+ ("CE-PAD-LEVL"		1	"CONTINUOUS"	"EARTHWORKS : PAD LEVEL")
+ ("CE-CUT-LINE"		116	"DASHED2"	"EARTHWORKS : CUT TO EXTENTS LINE")
+ ("CE-FILL-LINE"	253	"CONTINUOUS"	"EARTHWORKS : FILL TO EXTENTS LINE")
+ ("CE-HTCH"		35	"DASHDOT2"	"EARTHWORKS : CUT OR FILL HATCH")
+ ("CE-BATR-LINE"	1	"CONTINUOUS"	"EARTHWORKS : BATTER LINE")
+ )
+)
+
+
+#+tblname: layer_table
+| LAYER_NAME | COLOR | LINETYPE   | LINEWEIGHT |
+|------------+-------+------------+------------|
+| "0"        |     7 | CONTINUOUS |         15 |
+| DASHED     |     8 | DASHED     |         15 |
+| DIMENSION  |   162 | CONTINUOUS |         15 |
+| STEEL      |     7 | CONTINUOUS |         15 |
+| TEXT       |   162 | CONTINUOUS |         15 |
+| CENTER     |     1 | CENTER     |         15 |
+
+#+begin_src emacs-lisp :var tbl = layer_table :results code :tangle set_layers.lsp
+(setq layer_table tbl)
+#+end_src
+
+#+RESULTS:
+#+begin_src emacs-lisp
+(("0" 7 "CONTINUOUS" 15)
+ ("DASHED" 8 "DASHED" 15)
+ ("DIMENSION" 162 "CONTINUOUS" 15)
+ ("STEEL" 7 "CONTINUOUS" 15)
+ ("TEXT" 162 "CONTINUOUS" 15)
+ ("CENTER" 1 "CENTER" 15))
+#+end_src
+
+  
+
+
+#+begin_src python :session *Python* :var v=layer_table
+    acad = win32com.client.Dispatch("BricscadApp.AcadApplication")
+    adoc = acad.ActiveDocument
+    amodel = adoc.ModelSpace
+    v
+    for row in v:
+	print(row)
+	try:
+	    nl = adoc.Layers.Add(row[0])
+	    if row[2]!="Continuous":
+		adoc.Linetypes.Load(row[2], 'iso.lin')
+		nl.Linetype = row[2]
+	    nl.color=row[1]
+	    nl.lineweight=row[3]
+	except:
+	    pass
+
+#+end_src
+
+#+RESULTS:
+(command "sh" "C:\\Users\\filip\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe  c:\\Users\\filip\\AppData\\Roaming\\python\\cad2\\acad\\p_add_dimstyle.py")
+ (command "sh" "C:\\Python27\python.exe  C:\\your_path\\your_python.PY")
+
+
+
+python.exe  c:\Users\filip\AppData\Roaming\python\cad2\acad\p_add_dimstyle.py
