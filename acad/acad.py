@@ -26,6 +26,7 @@ class BCAD(object):
             super(BCAD, self).__setattr__(attr, n)
 
 class DOC(object):
+    """Initialize doc."""
     def __init__(self):
         app = BCAD()
         self.doc = app.ActiveDocument
@@ -61,9 +62,6 @@ class MODEL(object):
             setattr(self.model, attr, n)
         except:
             super(MODEL, self).__setattr__(attr, n)
-
-
-
 
 
 def start():
@@ -121,7 +119,7 @@ def work_with_ucs():
         ucs1 = adoc.UserCoordinateSystems.Add(c,
                                               xdir,
                                               ydir,
-d                                              ucs_name)
+                                              ucs_name)
         adoc.ActiveUCS  = ucs1
 
 def get_ucs_offset():
@@ -164,7 +162,7 @@ def write_table_to_temp(v):
 
 def test_greek(acad):
     mtext = f"""
-    ελληνικα
+    ÎµÎ»Î»Î·Î½Î¹ÎºÎ±
     """
     enc = sys.stdout.encoding
     #create_new_ucs(mtext.encode('utf-8'))
@@ -177,6 +175,13 @@ def test_greek(acad):
     mo =  amodel.AddMtext("0,0", 500, mtext)
     mo =  amodel.AddMtext("500,0", 500, mtext)
 
+
+def test_greek2(model,mtext="""Εδω τώρα γράφει ελληνικα"""):
+    """Test greek with object"""
+    mo = model.AddMtext("0,0",500,mtext)
+    return mo
+
+    
 def newtextstyle():
     m = adoc.TextStyles.Add("Standard")
     m.FontFile = "Calibri Light"
@@ -184,7 +189,7 @@ def newtextstyle():
 
 
 
-def change_dimensions_to_layer(layer_name):
+def change_dimensions_to_layer(adoc,layer_name):
     command = f"""(setvar "CMDECHO" 0)
     (setq sdim (ssget "_X" (list '(0 . "Dimension"))))
     (repeat (setq n (sslength sdim))
