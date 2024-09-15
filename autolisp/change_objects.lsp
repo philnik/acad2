@@ -30,7 +30,7 @@
 
 
 
- (defun change_dimension_layer (layer_name)
+(defun change_dimension_layer (layer_name)
  (progn
 (setq sdim (ssget  '((0 . "Dimension"))))
 (repeat (setq n (sslength sdim))
@@ -41,7 +41,10 @@
 (print ed)
 (entmod ed))
 ))
- 
+
+
+
+
  
 (defun c:setdim_layer (/ nl)
 x;  (setq nl (getstring "Layer name(Dimension):"))
@@ -102,6 +105,50 @@ x;  (setq nl (getstring "Layer name(Dimension):"))
     (print length)
     )
   )
+
+
+(defun c:get_data ()
+ (progn
+   (setq en_name (ssname (ssget) 0))
+   (setq ed (entget en_name))
+   (print ed)
+   ed
+   ))
+
+(defun c:set_line_endpoint ()
+ (progn
+   (setq en_name (ssname (ssget) 0))
+   (setq ed (entget en_name))
+   (setq ed (subst (cons 11 '(2.0 2.0 0.0)) (assoc 11 ed) ed ))
+   (entmod ed)
+   (print ed)
+   ed
+   )
+ )
+
+(defun c:get_line_length ()
+ (progn
+   (setq en_name (ssname (ssget) 0))
+   (setq ed (entget en_name))
+   (setq sp (cdr (assoc 10 ed)))
+   (setq ep (cdr (assoc 11 ed)))
+   (setq length (sqrt (+
+		       (power (- (car  sp) (car  ep)) 2)
+		       (power (- (cadr sp) (cadr ep)) 2)
+		       )))
+   length
+   )
+ )
+
+
+
+;;;
+;;;example of line
+;((-1 . <Entity name: c4239cc0>) (0 . "LINE") (5 . "9C") (330 . <Entity name: c5168c50>) (100 . "AcDbEntity") (67 . 0) (410 . "Model") (8 . "0") (100 . "AcDbLine") (10 0.0 0.0 0.0) (11 1.0 1.0 0.0) (210 0.0 0.0 1.0)) ((-1 . <Entity name: c4239cc0>) (0 . "LINE") (5 . "9C") (330 . <Entity name: c5168c50>) (100 . "AcDbEntity") (67 . 0) (410 . "Model") (8 . "0") (100 . "AcDbLine") (10 0.0 0.0 0.0) (11 1.0 1.0 0.0) (210 0.0 0.0 1.0))
+;;;
+
+
+
 
 (defun c:change_layer ()
     (setq en_name (ssname (ssget) 0))
