@@ -4,6 +4,68 @@ from win32com.client import Dispatch, VARIANT
 from pythoncom import VT_VARIANT
 import sys
 
+
+class BCAD(object):
+    def __init__(self):
+        """Initialize dispatch."""
+        self.acad = win32com.client.Dispatch("BricscadApp.AcadApplication")
+
+    def __getattr__(self, n):
+        """Getattr."""
+        try:
+            attr = getattr(self.acad, n)
+        except:
+            attr = super(BCAD, self).__getattr__(n)
+        return attr
+
+    def __setattr__(self, attr, n):
+        """Setattr."""
+        try:
+            setattr(self.acad, attr, n)
+        except:
+            super(BCAD, self).__setattr__(attr, n)
+
+class DOC(object):
+    def __init__(self):
+        app = BCAD()
+        self.doc = app.ActiveDocument
+
+    def __getattr__(self, n):
+        try:
+            attr = getattr(self.doc, n)
+        except:
+            attr = super(DOC, self).__getattr__(n)
+        return attr
+
+    def __setattr__(self, attr, n):
+        try:
+            setattr(self.doc, attr, n)
+        except:
+            super(DOC, self).__setattr__(attr, n)
+
+
+class MODEL(object):
+    def __init__(self):
+        doc = DOC()
+        self.model = doc.ModelSpace
+
+    def __getattr__(self, n):
+        try:
+            attr = getattr(self.model, n)
+        except:
+            attr = super(MODEL, self).__getattr__(n)
+        return attr
+
+    def __setattr__(self, attr, n):
+        try:
+            setattr(self.model, attr, n)
+        except:
+            super(MODEL, self).__setattr__(attr, n)
+
+
+
+
+
 def start():
     acad = win32com.client.Dispatch("BricscadApp.AcadApplication")
     adoc = acad.ActiveDocument
@@ -59,7 +121,7 @@ def work_with_ucs():
         ucs1 = adoc.UserCoordinateSystems.Add(c,
                                               xdir,
                                               ydir,
-                                              ucs_name)
+d                                              ucs_name)
         adoc.ActiveUCS  = ucs1
 
 def get_ucs_offset():
