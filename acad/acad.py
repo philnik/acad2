@@ -207,12 +207,14 @@ class document():
 
     docs, holds a list of all opened documents
     """
-    docs = {} 
+    docs = {}
+    opened = []
     def __init__(self):
         self.b = BCAD()
         self.name = ""
         self.handle = ""
         self.template = "C:\\Users\\filip\\AppData\\Local\\Bricsys\\BricsCAD\\V24x64\\en_US\\Templates\\Default-mm.dwt"
+        opened = self.get_opened()
 
     def new(self):
         """Creates a new document"""
@@ -228,3 +230,11 @@ class document():
     def close(self):
         self.handle.close()
         del(self)
+
+    def get_opened(self):
+        b = self.b
+        res = []
+        for i in b.Documents:
+            res.append([i.name,i])
+        document.opened = res    
+        return res
