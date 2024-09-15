@@ -200,3 +200,31 @@ def change_dimensions_to_layer(adoc,layer_name):
     (setvar "CMDECHO" 1)
     """
     adoc.SendCommand(command)
+
+class document():
+    """
+    Class to describe documents
+
+    docs, holds a list of all opened documents
+    """
+    docs = {} 
+    def __init__(self):
+        self.b = BCAD()
+        self.name = ""
+        self.handle = ""
+        self.template = "C:\\Users\\filip\\AppData\\Local\\Bricsys\\BricsCAD\\V24x64\\en_US\\Templates\\Default-mm.dwt"
+
+    def new(self):
+        """Creates a new document"""
+        template = self.template
+        b=self.b
+        new_doc = b.Documents.Add(template)
+        print(new_doc.name)
+        self.handle = new_doc
+        self.name = new_doc.name
+        document.docs[self.name]=[self.handle, self]
+        return new_doc
+
+    def close(self):
+        self.handle.close()
+        del(self)
