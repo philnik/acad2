@@ -53,12 +53,68 @@ x;  (setq nl (getstring "Layer name(Dimension):"))
   (print nlayer)
   (change_dimension_layer "dimension")
   )
- 
- 
- 
 ;;(setvar "CMDECHO" 1)
-
 ;;(change_dimension_layer "1")
+;;;change parameter - does not work from lisp
+ (defun c:copyp ()
+ (progn
+   (setq ed (entget (ssname (ssget) 0)))
+   (setq ed (subst (cons 42 200.0) (assoc 42 ed) ed ))
+   (setq ed (subst (cons 1 "d3=200.0") (assoc 1 ed) ed ))
+   (entmod ed))
+ )
+
+(defun c:get_objname ()
+(progn 
+(setq en_name (ssname (ssget) 0))
+(setq obj_name (vla-get-objectname (vlax-ename->vla-object en_name)))
+(print obj_name)
+)
+)
+
+(defun c:get_handle ()
+(progn 
+  (setq en_name (ssname (ssget) 0))
+  (setq handle (vla-get-handle (vlax-ename->vla-object (cdar elst))))
+  (print handle )
+  handle
+  )
+)
+
+
+(defun c:get_line_length ()
+(progn 
+(setq en_name (ssname (ssget) 0))
+(setq obj_name (vlax-ename->vla-object en_name))
+(setq obj (vlax-get-property obj_name 'Length))
+(print obj)
+)
+)
+
+
+;;;no working
+(defun c:set_line_length ()
+  (progn
+    (setq length (getdist "Length:"))
+    (setq en_name (ssname (ssget) 0))
+    (setq obj_name (vlax-ename->vla-object en_name))
+    (vlax-put-property obj_name 'Length length)
+    (print length)
+    )
+  )
+
+(defun c:change_layer ()
+    (setq en_name (ssname (ssget) 0))
+    (setq obj (vlax-ename->vla-object en_name))
+    (vlax-put-property obj 'Layer "Defpoints")
+    )
+
+
+(setq origin
+      "0,0"
+      )
+
+"AcDbRotatedDimension"
 
 
 
