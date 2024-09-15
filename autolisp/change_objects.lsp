@@ -126,9 +126,9 @@ x;  (setq nl (getstring "Layer name(Dimension):"))
    )
  )
 
-(defun c:get_line_length ()
+
+(defun get_line_length (en_name)
  (progn
-   (setq en_name (ssname (ssget) 0))
    (setq ed (entget en_name))
    (setq sp (cdr (assoc 10 ed)))
    (setq ep (cdr (assoc 11 ed)))
@@ -139,6 +139,38 @@ x;  (setq nl (getstring "Layer name(Dimension):"))
    length
    )
  )
+
+(defun c:get_line_length ()
+ (progn
+   (setq en_name (ssname (ssget) 0))
+   (get_line_length en_name)))
+
+
+(defun c:set_line_length2 ()
+ (progn
+   (setq en_name (ssname (ssget) 0))
+   (setq length (get_line_length en_name))
+   (setq sp (cdr (assoc 10 ed)))
+   (setq ep (cdr (assoc 11 ed)))
+   (setq ep (list (* (car ep) length) (* (cadr ep) length)))
+   
+   )
+ )
+
+(defun c:set_line_endpoint2 ()
+  (progn
+    (setq new_length (getreal "New length:"))
+   (setq en_name (ssname (ssget) 0))
+   (setq ed (entget en_name))
+
+   (setq length (get_line_length en_name))
+   (setq sp (cdr (assoc 10 ed)))
+   (setq ep (cdr (assoc 11 ed)))
+   (setq sf (/ new_length length))
+   (command "scale" en_name "" "" sp sf)
+   )
+ )
+
 
 
 
