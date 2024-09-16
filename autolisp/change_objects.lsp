@@ -140,6 +140,18 @@ x;  (setq nl (getstring "Layer name(Dimension):"))
    )
  )
 
+(defun get_line_length (en_name)
+ (progn
+   (setq ed (entget en_name))
+   (setq sp (cdr (assoc 10 ed)))
+   (setq ep (cdr (assoc 11 ed)))
+   (setq length (distance sp ep))
+   length
+   )
+ )
+
+
+
 (defun c:get_line_length ()
  (progn
    (setq en_name (ssname (ssget) 0))
@@ -194,6 +206,25 @@ x;  (setq nl (getstring "Layer name(Dimension):"))
       )
 
 "AcDbRotatedDimension"
+
+
+
+;;;example list
+(setq a (list (cons 'x 1)
+	      (cons 'y 2)
+	      (cons 'z 3)
+	      (cons 'p '(1 2 3))
+      ))
+
+(defun getv (key lista)
+  "get key value"
+  (cdr (assoc key lista))
+  )
+
+(defun setv (key val lista)
+  "change key value"
+  (subst (cons key val) (assoc key lista) lista)
+  )
 
 
 
