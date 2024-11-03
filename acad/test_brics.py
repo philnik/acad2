@@ -32,3 +32,5 @@ print(doc.name)
 root = "c:/Users/filip/Documents/"
 
 # (command "_.-hatch" "S" e "" "P" "ANSI37" 1.0 0.0 "")
+
+

@@ -1,0 +1,123 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BricscadApp;
+using BricscadDb;
+using System.Runtime.InteropServices; // Required for COM interop
+using System.IO;
+using System.Data.SQLite;
+
+namespace csharp_app
+{
+    internal class Program  
+    {
+
+        public class Sql {
+
+            public void Get_sql_version()
+            {
+                string cs = "Data Source=:memory:";
+                string stm = "SELECT SQLITE_VERSION()";
+
+                var con = new SQLiteConnection(cs);
+                con.Open();
+
+                var cmd = new SQLiteCommand(stm, con);
+                string version = cmd.ExecuteScalar().ToString();
+
+                Console.WriteLine($"SQLite version: {version}");
+                Console.ReadLine();
+
+            }
+
+
+        }
+
+        public class Bcad
+        {
+            public BricscadApp.AcadApplication acad;
+            public BricscadApp.AcadDocument doc;
+            public BricscadDb.AcadModelSpace model;
+
+            public string DefaultTemplate = @"C:\Users\filip\AppData\Local\Bricsys\BricsCAD\V24x64\en_US\Templates\Default-mm.dwt";
+
+            public void Acad()
+            {
+                acad = (BricscadApp.AcadApplication)Marshal.GetActiveObject("BricscadApp.AcadApplication");
+                doc = acad.ActiveDocument;
+                model = doc.ModelSpace;
+            }
+        }
+
+        static void Main(string[] args) {
+             Bcad cad = new Bcad();  
+             cad.Acad();
+            NewDocument(cad);
+            BricscadDb.AcadModelSpace model;    
+
+             double[] startPoint = { 0, 0, 0 };
+             double[] endPoint = { 10, 10, 0 };
+
+             model = cad.model;  
+             cad.model.AddLine(startPoint, endPoint);
+
+            NewDocument(cad);
+            CloseCurrentDocument(cad);
+
+            Sql mysql = new Sql();
+
+            mysql.Get_sql_version();
+            
+
+            
+
+        }
+
+        static void NewDocument(Bcad bcad)
+        {
+
+            bcad.acad.Documents.Add(bcad.DefaultTemplate);
+
+        }
+
+	static void CloseCurrentDocument(Bcad bcad)
+	{
+	    bcad.doc.Close();
+
+	}
+
+    static void GetAllParameters(Bcad bcad)
+        {
+            
+
+
+
+
+
+        }
+
+	
+        void Main1(string[] args)
+        {
+            BricscadApp.AcadApplication acad;
+            BricscadApp.AcadDocument doc;
+            BricscadDb.AcadModelSpace model;
+
+            acad = (BricscadApp.AcadApplication)Marshal.GetActiveObject("BricscadApp.AcadApplication");
+                                          
+            doc = acad.ActiveDocument;
+
+            model = doc.ModelSpace;
+
+
+            double[] startPoint = { 0, 0, 0 };
+            double[] endPoint = { 10, 10, 0 };
+
+            model.AddLine(startPoint, endPoint);
+
+
+        }
+    }
+}
