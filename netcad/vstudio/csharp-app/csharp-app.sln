@@ -5,7 +5,7 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp-app", "csharp-app.csproj", "{36866A5E-8135-47B7-86BB-198CE979CD8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary2", "..\ClassLibrary2\ClassLibrary2.csproj", "{49F0A94A-5D3C-48AA-8890-260DC13D119C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brics_Sharp", "..\brics_sharp\Brics_Sharp.csproj", "{49F0A94A-5D3C-48AA-8890-260DC13D119C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -8,7 +8,7 @@ using BricscadDb;
 using System.Runtime.InteropServices; // Required for COM interop
 using System.IO;
 using System.Data.SQLite;
-using ClassLibrary2;
+using brics_sharp;
 using System.Diagnostics;
 using BricscadSm;
 // #r "nuget "C:\Users\filip\source\repos\csharp-app\bin\Debug\ClassLibrary2.dll"
@@ -43,9 +43,15 @@ namespace csharp_app
             // NewDocument(cad);
             BricscadDb.AcadModelSpace model;
             
-            /*
+            
+            // Add n = new Add();
+            // n.acad = cad;
+
+
+            
             Add n = new Add();
             n.acad = cad;
+            /*
             double val;
             for (int i = 0; i < 200; i++)
             {
@@ -53,6 +59,8 @@ namespace csharp_app
                 n.Line(val * Math.Sin(val), val * Math.Cos(val), 0.0, 0.0);
             }
             */
+            n.Add_Axial_Lines();
+
 
             //NewDocument(cad);
             //CloseCurrentDocument(cad);
