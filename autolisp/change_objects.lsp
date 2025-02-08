@@ -227,4 +227,43 @@ x;  (setq nl (getstring "Layer name(Dimension):"))
   )
 
 
+(defun c:CHGATTR (/ blkEnt blkObj attName attVal attArray att i)
+  (vl-load-com)
+
+  ;; Select a block
+  (setq blkEnt (car (entsel "\nSelect a block: ")))
+
+  ;; Ensure selection is valid
+  (if (and blkEnt
+           (setq blkObj (vlax-ename->vla-object blkEnt))
+           (= (vla-get-ObjectName blkObj) "AcDbBlockReference"))  ; Confirm it's a block
+
+    (progn
+      ;; Get attribute name from user
+      (setq attName (strcase (getstring "\nEnter attribute tag name: ")))
+      (setq attVal (getstring "\nEnter new attribute value: "))
+
+      ;; Get attribute array from block
+      (setq attArray (vlax-invoke blkObj 'GetAttributes))
+
+      ;; Loop through attributes to find the correct tag
+      (setq i 0)
+      (while (< i (length attArray))
+        (setq att (nth i attArray))
+        (if (= (strcase (vla-get-TagString att)) attName)
+          (progn
+            (vla-put-TextString att attVal)  ; Change the attribute value
+            (princ (strcat "\nUpdated " attName " to " attVal))
+          )
+        )
+        (setq i (1+ i))
+      )
+
+      (princ "\nAttribute update complete.")
+    )
+    
+    (princ "\nSelected entity is not a block reference.")
+  )
+  (princ)
+)
 
