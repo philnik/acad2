@@ -8,14 +8,15 @@ import sys
 import clr
 
 assembly_path = r"C:\Users\filip\source\repos\ClassLibrary2\bin\Debug"
-
+assembly_path = r"C:\Users\filip\source\repos\ClassLibrary2\bin\Debug"
+assembly_path = r"C:\Users\filip\AppData\Roaming\python\acad2\netcad\vstudio\brics_sharp\bin\Debug"
 import sys
 sys.path.append(assembly_path)
 
-clr.AddReference("ClassLibrary2")
+clr.AddReference("brics_sharp")
 
 
-from ClassLibrary2 import (Sql,
+from brics_sharp import (Sql,
                            Acad,
                            Add)
 
@@ -52,6 +53,8 @@ q0 = acad()
 
 
 q0.add.Line(1,2,3,4)
+
+q0.add.Add_Axial_Lines()
 
 
 class add():
@@ -112,4 +115,5 @@ def add_lot_of_lines():
     MyClass.Myfunc()
 """
 
+q0.Add_Axial_Lines()
 
