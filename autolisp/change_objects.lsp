@@ -6,6 +6,10 @@
 ;;   (setvar "CMDECHO" 0)
 
 
+(setq a '((0 . "STYLE") (2 . "Standard") (70 . 0) (40 . 0.0) (41 . 1.0) (50 . 0.0) (71 . 0) (42 . 0.2) (3 . "arial.ttf") (4 . "")))
+
+
+
 (defun C:c_textstyle ()
   (setq doc (vla-get-ActiveDocument (vlax-get-acad-object)))
   (setq styleCol (vla-get-TextStyles doc))
