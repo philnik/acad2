@@ -3,16 +3,61 @@
 "load autolisp plot file"
 
 
-(defun c:bt ()
+
+;;;plot pdf extensions
+(defun bt (orientation window)
   (command "-PLOT"
            "Y"
            "Model"
            "PDF.pc3"
            "A4"
            ""
-           "Landscape"
+           orientation
            "No"
-           "Extents"
+           window ;; "Extents" or "Window"
+           "Fit"
+           "Center"
+           "Yes"
+           "default.ctb"
+           "Yes"
+           "A"
+           "Yes"
+           "Yes"
+           )
+  )
+
+(defun c:btl ()
+  (bt "Landscape" "Extends")
+  )
+
+
+
+(defun c:btp ()
+  (bt "Portrait" "Extends")
+  )
+;;;;
+
+
+;;; plot pdf window
+(defun get2p ()
+  (setq pt1 (getpoint "\nLower-left corner: "))  ; Get the first point
+  (setq pt2 (getpoint "\nTop-right corner: ")) ; Get the second point
+  (list pt1 pt2)
+)
+
+
+(defun bp (orientation pt1 pt2)
+  (command "-PLOT"
+           "Y"
+           "Model"
+           "PDF.pc3"
+           "A4"
+           ""
+           orientation
+           "No"
+           "Window"
+           pt1
+           pt2
            "Fit"
            "Center"
            "Yes"
@@ -25,25 +70,44 @@
   )
 
 
-
-(defun c:plotme ()
-  " plotme "
+(defun c:bpl ()
+  (setq pt (get2p))
+  (bp "Landscape" (car pt) (cadr pt))
   )
 
 
+(defun c:bpp ()
+  (setq pt (get2p))
+  (bp "Portrait" (car pt) (cadr pt))
+  )
+;;;;
+
+
+
+
+
+(defun c:plotme ()
+  (print " plotme ")
+  )
+
+
+
 (defun c:getbb ()
-  (setq ss (ssget))  ; Prompt the user to select an object
+  (setq ss (ssget))
+  
   (if ss
     (progn
       (setq ent (ssname ss 0))  ; Get the first selected entity
-      (setq obj (vlax-ename->vla-object ent))  ; Get the VLA-object reference
-      (setq bbox (vlax-invoke obj 'GetBoundingBox))  ; Get the bounding box
+      (setq data (entget ent))  ; Get the entity data
 
-      ; Extract the minimum and maximum points from the bounding box
-      (setq minpt (vlax-get bbox 'Item 0))  ; Minimum point
-      (setq maxpt (vlax-get bbox 'Item 1))  ; Maximum point
+      ; Extract the BBOX data using the 10 (point) and 11 (BBOX) codes
+      (setq bbox (cdr (assoc 10 data)))  ; Get the base point from the data (code 10)
+      
+      ; Get the bounding box values (assuming the entity has extents)
+      (setq minpt (cdr (assoc 10 data)))  ; Extract the minimum point from the entity's data
+      (setq maxpt (cdr (assoc 11 data)))  ; Extract the maximum point from the entity's data
 
-      ; Extract X, Y, and Z coordinates of the bounding box
+      ; Extract X, Y, and Z coordinates from minpt and maxpt
       (setq xmin (car minpt))
       (setq ymin (cadr minpt))
       (setq xmax (car maxpt))
@@ -55,4 +119,10 @@
                     "\nY Min: " (rtos ymin 2 4)
                     "\nX Max: " (rtos xmax 2 4)
                     "\nY Max: " (rtos ymax 2 4)))
-   
+    )
+    (princ "\nNo object selected.")
+  )
+  (princ)
+)
+
+
