@@ -5,7 +5,7 @@
 #ac = win32com.client.Dispatch('PythonDemos.Utilities')
 
 class PythonUtilities:
-    _public_methods_ = [ 'greet' ]
+    _public_methods_ = [ 'greet','get_BCAD' ]
     _reg_progid_ = "PythonDemos.Utilities"
     # NEVER copy the following ID 
     # Use "print pythoncom.CreateGuid()" to make a new one.
@@ -13,6 +13,11 @@ class PythonUtilities:
 
     def greet(self):
         print("hello")
+        
+    def get_BCAD(self):
+        from acad.acad import BCAD
+        return BCAD()
+    
     
 
 
