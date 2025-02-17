@@ -3,6 +3,9 @@
 # We simply expose a single method in a Python COM object.
 #import win32com.client
 #ac = win32com.client.Dispatch('PythonDemos.Utilities')
+import sys
+sys.path.append("c://Users//filip//AppData//Roaming//python//acad2//acad")
+
 
 class PythonUtilities:
     _public_methods_ = [ 'greet','get_BCAD','bpl' ]

@@ -1,5 +1,8 @@
 from acad.acad import DOC
 
+import sys
+sys.path.append("c://Users//filip//AppData//Roaming//python//acad2//")
+
 d=DOC()
 
 
