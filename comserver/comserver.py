@@ -2,8 +2,10 @@ import pythoncom
 from win32com.server.exception import COMException
 from win32com.server.util import wrap
 from win32com.server.register import UseCommandLine
+from acad.acad import DOC
 
-
+#register comserver using shell
+#python comserver.py --register
 
 # Generate a unique GUID for your COM object (use pythoncom.CreateGuid())
 MY_COM_CLASS_GUID = "{04231AAD-D8E9-464C-B95A-B1F5B033207A}"
@@ -29,6 +31,12 @@ class MyCOMServer:
     def Greet(self, name):
         """Return a greeting."""
         return f"Hello, {name}!"
+
+    def plot_window_landscape(self):
+        d=DOC()
+        doc=d.doc
+        doc.SendCommand("bpl ")
+        
 
 if __name__ == '__main__':
     # Register/Unregister the COM server using command-line arguments
