@@ -4,15 +4,22 @@
 
 (defun c:reload ()
   (load "parametric.lsp")
-(load "textstyles.lsp")
-(load "setlayers.lsp")
-(load "add_dim.lsp")
-(load "change_objects.lsp")
-(load "text.lsp")
-
-
+  (load "textstyles.lsp")
+  (load "setlayers.lsp")
+  (load "add_dim.lsp")
+  (load "change_objects.lsp")
+  (load "text.lsp")
+  (load "plot.lsp")
+  (load "log.lsp")
+  (load "comserver.lsp")
 )
 
+(c:reload)
+
+(defun c:mktmpl ()
+  (C:addstyles) ;; from text styles
+
+)
 
 (defun c:cdef  (/ DS)
   (setq DS "mydim")
@@ -34,3 +41,4 @@
   (vlax-release-object wsh)  ; Clean up
   (princ "\nPython script executed.")
 )
+

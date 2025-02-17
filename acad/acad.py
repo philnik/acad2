@@ -1,4 +1,6 @@
 #c:/Users/filip/anaconda3/Scripts/pip3 install --editable ./
+#c:/ProgramData/anaconda3/Scripts/pip3 install --editable ./
+
 
 import win32com.client
 import pythoncom

@@ -2,7 +2,7 @@ import pythoncom
 from win32com.server.exception import COMException
 from win32com.server.util import wrap
 from win32com.server.register import UseCommandLine
-from acad.acad import DOC
+#from acad.acad import DOC
 
 #register comserver using shell
 #python comserver.py --register

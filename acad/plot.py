@@ -41,6 +41,7 @@ plot_command = (
 
 #doc.SendCommand(plot_command)
 
-#I am moved ploting handlers to plot.lsp 
-#doc.SendCommand("bpl ")
+#I am moved ploting handlers to plot.lsp
+def plot_window_landscape():
+    doc.SendCommand("bpl ")
 
