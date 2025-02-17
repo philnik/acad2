@@ -1,12 +1,16 @@
 #c:/Users/filip/anaconda3/Scripts/pip3 install --editable ./
 #c:/ProgramData/anaconda3/Scripts/pip3 install --editable ./
-
+#pip3 install --editable ./
 
 import win32com.client
 import pythoncom
 from win32com.client import Dispatch, VARIANT
 from pythoncom import VT_VARIANT
 import sys
+
+#ac = win32com.client.Dispatch('MyPythonCOM.Server')
+#ac = win32com.client.Dispatch('PythonCOM.test')
+
 
 
 class BCAD(object):

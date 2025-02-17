@@ -21,7 +21,7 @@ class MyCOMServer:
     # Required COM attributes
     _public_methods_ = ['AddNumbers', 'Greet']
     _reg_clsid_ = MY_COM_CLASS_GUID
-    _reg_progid_ = 'MyPythonCOM.Server'  # Unique ProgID
+    _reg_progid_ = 'MyPythonCOM.test'  # Unique ProgID
     _reg_desc_ = 'My Python COM Server'
 
     def AddNumbers(self, a, b):

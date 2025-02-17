@@ -1,4 +1,4 @@
-from acad import DOC
+from acad.acad import DOC
 
 d=DOC()
 
