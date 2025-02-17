@@ -1,4 +1,4 @@
-#from acad.acad import DOC
+from acad import DOC
 
 d=DOC()
 
@@ -11,7 +11,7 @@ doc = d.doc
 layout = doc.Layouts.Item("Model")  # Change to a paper space layout if needed
 
 
-PlotDevice = "Print As PDF.pc3"
+PlotDevice = "PDF.pc3"
 Orientation = 'Landscape'
 
 #works if style is autospool
@@ -33,12 +33,14 @@ plot_command = (
     'default.ctb' + '\n' +  # plot style name
     'Yes' + '\n' + # plot with lineweights
     'A' + '\n' + # shade plot
-    'Yes'
+    'Yes' + '\n' +
+    'Yes' + '\n'
 #    f'"{output_pdf}"\n'   # Output file path
 )
 
 
+#doc.SendCommand(plot_command)
 
-doc.SendCommand(plot_command)
-
+#I am moved ploting handlers to plot.lsp 
+#doc.SendCommand("bpl ")
 
