@@ -10,8 +10,9 @@
   (load "change_objects.lsp")
   (load "text.lsp")
   (load "plot.lsp")
-  (load "log.lsp")
   (load "comserver.lsp")
+  (load "log.lsp")
+
 )
 
 (c:reload)
@@ -41,4 +42,3 @@
   (vlax-release-object wsh)  ; Clean up
   (princ "\nPython script executed.")
 )
-
