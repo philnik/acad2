@@ -1,21 +1,31 @@
 
 
-"load plot file"
-(setq output_folder "C://Users//filip//AppData//Roaming//draw//plots//")
+"load autolisp plot file"
 
-(defun c:batchplot ()
-  (setq fname "output.pdf")
-  (setq full_name (strcat output_folder fname))
-  (command "-PLOT" "Y" "Model" "Print As PDF.pc3" "A4" "Landscape" "No" "Extents" "Fit" "Yes" full_name "No" "Yes")
-)
+
+(defun c:bt ()
+  (command "-PLOT"
+           "Y"
+           "Model"
+           "PDF.pc3"
+           "A4"
+           ""
+           "Landscape"
+           "No"
+           "Extents"
+           "Fit"
+           "Center"
+           "Yes"
+           "default.ctb"
+           "Yes"
+           "A"
+           "Yes"
+           "Yes"
+           )
+  )
 
 
 
 (defun c:plotme ()
-
-
-
   " plotme "
-
-
   )
