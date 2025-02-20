@@ -1,6 +1,8 @@
 import win32com.client
-ac = win32com.client.Dispatch('PythonDemos.Utilities')
+ac = win32com.client.Dispatch('cad.python')
 
-#ac.get_BCAD()
+ac.get_BCAD()
 
-#ac.bpl()
+ac.bpl()
+
+ac.greet()
