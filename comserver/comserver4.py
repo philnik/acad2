@@ -7,10 +7,10 @@
 
 class PythonUtilities:
     _public_methods_ = [ 'greet','get_BCAD','bpl' ]
-    _reg_progid_ = "PythonDemos.Utilities"
+    _reg_progid_ = "cad.python"
     # NEVER copy the following ID 
     # Use "print pythoncom.CreateGuid()" to make a new one.
-    _reg_clsid_ = "{11406e50-15e6-4cc1-afa5-51430eb3f64a}"
+    _reg_clsid_ = "{6c83a9f3-8bb6-48fb-ad54-3b428234f402}"
 
     def greet(self):
         print("hello")
@@ -20,6 +20,8 @@ class PythonUtilities:
         return BCAD()
 
     def bpl(self):
+        from acad.acad import BCAD
+        b=BCAD()
         from acad.plot import plot_window_landscape
         plot_window_landscape()
     
