@@ -20,3 +20,27 @@
   (princ "\make this")
 )
 
+
+;; mode :is an integer to control the behaviour of the OS shell box :
+;; 0        show the shell window in normal (last-used) mode
+;; 1        show the shell window in normal (last-used) mode, but is not activated
+;; 2        show the shell window in minimised, but inactive state
+;; 3        show the shell window in minimised, and active state
+;; 4        show the shell window in maximised state
+
+
+;;(dos_command "ls" 2)
+(defun a ()
+(dos_command "python -c '''
+import sys
+
+def a():
+ print('hello')
+
+a()
+''' &&
+sleep 10
+ " 0)
+)
+ 
+
