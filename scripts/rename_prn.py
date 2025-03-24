@@ -28,14 +28,3 @@ def rename_prn_to_pdf(folder_path):
             # Rename the file
             os.rename(old_file_path, new_file_path)
             print(f"Renamed: {filename} -> {new_filename}")
-
-
-def prn2pdf():
-    folder_path = r"C:\Users\f.nikolakopoulos\AppData\Roaming\draw\plot"
-    rename_prn_to_pdf(folder_path)
-
-
-#a = "03212025_105944_EF-09.KDSA-3500-STANDARD-LEFT-TOP-SOUND.pdf"
-
-
-prn2pdf()
