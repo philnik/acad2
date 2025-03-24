@@ -1,0 +1,39 @@
+
+;;; testing how to run 
+(defun c:RunPythonFile ()
+  ;;;update to run the python  file silently
+  (vl-load-com)
+  (setq wsh (vlax-create-object "WScript.Shell"))  ; Create Windows Shell object
+  (vlax-invoke wsh 'Run "cmd /c python C:\\scripts\\example.py" 0  1)  ; Run Python script
+  (vlax-release-object wsh)  ; Clean up
+  (princ "\nPython script executed silently.")
+)
+
+
+;;; testing how to run 
+(defun c:rename_prn ()
+  ;;;update to run the python  file silently
+  (vl-load-com)
+  (setq wsh (vlax-create-object "WScript.Shell"))  ; Create Windows Shell object
+  (vlax-invoke wsh 'Run
+               "cmd /c python c:/Users/f.nikolakopoulos/AppData/Roaming/source/acad2/scripts/rename_prn.py"
+               0  1)  ; Run Python script
+  (vlax-release-object wsh)  ; Clean up
+  (princ "\nPython script executed silently.")
+)
+
+
+
+;;; testing how to run 
+(defun c:rename_prn2 ()
+  ;;;update to run the python  file silently
+  ;; it does not load local packagers
+  (vl-load-com)
+  (setq wsh (vlax-create-object "WScript.Shell"))  ; Create Windows Shell object
+  (vlax-invoke wsh 'Run
+               "cmd /c set PATH=C:/ProgramData/anaconda3/;%PATH% && C:/ProgramData/anaconda3/condabin/activate.bat && C:/ProgramData/anaconda3/python.exe c:/Users/f.nikolakopoulos/AppData/Roaming/source/acad2/scripts/rename_prn2.py"
+               0  1)  ; Run Python script
+  (vlax-release-object wsh)  ; Clean up
+  (princ "\nPython script executed silently.")
+)
+
