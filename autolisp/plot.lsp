@@ -4,6 +4,10 @@
 
 
 
+(defun after-plot-hook ()
+  (c:rename_prn2)
+  )
+
 ;;;plot pdf extensions
 (defun bt (orientation window)
   (command "-PLOT"
@@ -28,12 +32,14 @@
 
 (defun c:btl ()
   (bt "Landscape" "Extends")
+  (after-plot-hook)
   )
 
 
 
 (defun c:btp ()
   (bt "Portrait" "Extends")
+  (after-plot-hook)
   )
 ;;;;
 
@@ -70,15 +76,19 @@
   )
 
 
+
+;;;;
 (defun c:bpl ()
   (setq pt (get2p))
   (bp "Landscape" (car pt) (cadr pt))
+  (after-plot-hook)
   )
 
 
 (defun c:bpp ()
   (setq pt (get2p))
   (bp "Portrait" (car pt) (cadr pt))
+  (after-plot-hook)
   )
 ;;;;
 

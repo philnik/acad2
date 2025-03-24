@@ -3,7 +3,8 @@
 
 
 (defun c:reload0 ()
-  (load "on_doc_load.lsp")
+                                        ;  (load "on_doc_load.lsp")
+  (load "python.lsp")
   (load "parametric.lsp")
   (load "textstyles.lsp")
   (load "setlayers.lsp")
@@ -15,9 +16,10 @@
   (load "merge.lsp")
   (load "log.lsp")
   (load "colors.lsp")
+
 )
 
-;(c:reload)
+(c:reload0)
 
 (defun c:mktmpl ()
   (C:addstyles) ;; from text styles
@@ -34,13 +36,4 @@
     (command ".-dimstyle" "S" DS)
     )
   
-)
-
-;;; testing how to run 
-(defun c:RunPythonScript ()
-  (vl-load-com)
-  (setq wsh (vlax-create-object "WScript.Shell"))  ; Create Windows Shell object
-  (vlax-invoke wsh 'Run "python C:\\scripts\\example.py")  ; Run Python script
-  (vlax-release-object wsh)  ; Clean up
-  (princ "\nPython script executed.")
 )

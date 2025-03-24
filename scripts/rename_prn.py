@@ -1,3 +1,4 @@
+
 import os
 
 def swap_filename_date(a):
@@ -36,3 +37,5 @@ def prn2pdf():
 
 #a = "03212025_105944_EF-09.KDSA-3500-STANDARD-LEFT-TOP-SOUND.pdf"
 
+
+prn2pdf()
