@@ -1,11 +1,7 @@
-
-
 "load autolisp plot file"
 
-
-
-(defun after-plot-hook ()
-  (c:rename_prn2)
+(defun after-plot-hook (pt)
+  (c:rename_prn2 pt)
   )
 
 ;;;plot pdf extensions
@@ -32,14 +28,14 @@
 
 (defun c:btl ()
   (bt "Landscape" "Extends")
-  (after-plot-hook)
+  ;;;(after-plot-hook pt)
   )
 
 
 
 (defun c:btp ()
   (bt "Portrait" "Extends")
-  (after-plot-hook)
+  ;;;(after-plot-hook pt)
   )
 ;;;;
 
@@ -75,25 +71,20 @@
            )
   )
 
-
-
 ;;;;
 (defun c:bpl ()
   (setq pt (get2p))
   (bp "Landscape" (car pt) (cadr pt))
-  (after-plot-hook)
+  (after-plot-hook pt)
   )
 
 
 (defun c:bpp ()
   (setq pt (get2p))
   (bp "Portrait" (car pt) (cadr pt))
-  (after-plot-hook)
+  (after-plot-hook pt)
   )
 ;;;;
-
-
-
 
 
 (defun c:plotme ()

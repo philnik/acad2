@@ -38,4 +38,5 @@ def backup_current_document(ns):
 
 ns = now_string()
 block.change_drawing_no(ns)
+block.change_at
 backup_current_document(ns)

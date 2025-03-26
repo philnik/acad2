@@ -12,6 +12,10 @@ def swap_filename_date(a):
 
 
 def rename_prn_to_pdf(folder_path):
+    """ renames all files
+    in folder from prn to pdf
+
+    """
     # Check if the folder exists
     if not os.path.exists(folder_path):
         print(f"The folder {folder_path} does not exist.")
@@ -32,6 +36,31 @@ def rename_prn_to_pdf(folder_path):
             # Rename the file
             os.rename(old_file_path, new_file_path)
             print(f"Renamed: {filename} -> {new_filename}")
+
+
+
+def rename_prn_to_pdf2(folder_path,ns):
+    # Check if the folder exists
+    if not os.path.exists(folder_path):
+        print(f"The folder {folder_path} does not exist.")
+        return
+
+    # Scan all files in the folder
+    for filename in os.listdir(folder_path):
+        # Create the full path to the file
+        old_file_path = os.path.join(folder_path, filename)
+
+        # Check if it's a file (skip directories)
+        if os.path.isfile(old_file_path) and filename.endswith('.prn'):
+            # Replace the .prn extension with .pdf
+            b= filename.split('_')
+            new_filename = b[0] + ns + ".pdf"
+            new_file_path = os.path.join(folder_path, new_filename)
+            
+            # Rename the file
+            os.rename(old_file_path, new_file_path)
+            print(f"Renamed: {filename} -> {new_filename}")
+
 
 
 def prn2pdf():
