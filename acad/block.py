@@ -43,3 +43,32 @@ def change_drawing_no(new_value):
                     print(f"Updated attribute {attribute_tag} in block {block_name} to {new_value}")
                 if att.TagString == "DATE":
                     att.TextString = date_string()
+
+
+def change_attributes_on_region(region, new_value):
+    # Define the block name and the attribute tag you're looking to update
+    block_name = "telaro_bom"  # Replace with the actual block name
+    attribute_tag = "DRAWINGNO"  # Replace with the actual attribute tag
+    #new_value = "20251010"  # The value to set for the attribute
+
+    # Loop through each entity in ModelSpace to find the block reference
+
+    x1 = region[0]
+    y1 = region[1]
+    x2 = region[2]
+    y2 = region[3]
+    
+    for entity in model_space:
+        if entity.EntityName == "AcDbBlockReference" and entity.Name == block_name:
+            block_position = entity.InsertionPoint
+            x, y, z = block_position
+            if x1 <= x <= x2 and y1 <= y <= y2:
+                # Loop through the attributes of the block reference
+                for att in entity.GetAttributes():
+                    if att.TagString == "DRAWINGNO":
+                        # Update the attribute's value
+                        att.TextString = new_value
+                        print(f"Updated attribute {attribute_tag} in block {block_name} to {new_value}")
+                    if att.TagString == "DATE":
+                        att.TextString = date_string()
+
