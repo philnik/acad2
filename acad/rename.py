@@ -1,8 +1,4 @@
 import os
-
-
-
-import os
 import shutil
 import re
 from datetime import datetime
@@ -13,7 +9,7 @@ def swap_filename_date(a):
     b= a.split('_')
     c= b[0]
     return f"{b[2][:-4]}_{c[-2:]}{c[0:2]}{c[2:4]}{b[1]}{b[2][-4:]}"
-Ω
+
 
 def rename_prn_to_pdf(folder_path):
     # Check if the folder exists
