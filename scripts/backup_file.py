@@ -6,12 +6,10 @@ from pythoncom import VT_VARIANT
 import sys
 import datetime
 import shutil
+import block 
 
 app = win32com.client.Dispatch("BricscadApp.AcadApplication")
 doc = app.ActiveDocument
-
-
-
 
 def now_string():
     """
@@ -28,13 +26,16 @@ def now_string():
     return y
 
 
-def backup_current_document():
+
+def backup_current_document(ns):
     if not(doc.path):
         doc.Save()
     dest_path = "C://Users//f.nikolakopoulos//AppData//Roaming//draw//plot//backup//"
     fsource = doc.path+doc.name
-    fdest = dest_path+doc.name[:-4]+ '_' +now_string() + '.' + doc.name[-3:]
+    fdest = dest_path+doc.name[:-4]+ '_' + ns + '.' + doc.name[-3:]
     shutil.copy(fsource, fdest)
     print(f"""copy {fsource} to {fdest}""")
 
-backup_current_document()
+ns = now_string()
+block.change_drawing_no(ns)
+backup_current_document(ns)
