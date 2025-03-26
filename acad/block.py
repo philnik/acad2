@@ -15,8 +15,6 @@ doc = app.ActiveDocument
 model_space = doc.ModelSpace
 
 
-
-
 def date_string():
     """
     exports now string of the form yyyymmdd_hhmm
@@ -27,13 +25,6 @@ def date_string():
          + str(format(int(x.month),  "02d")) + '-'
          + str(format(int(x.year-2000), "02d")))
     return y
-
-
-
-    
-    return y
-
-
 
 def change_drawing_no(new_value):
     # Define the block name and the attribute tag you're looking to update
