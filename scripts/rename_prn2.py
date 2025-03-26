@@ -21,7 +21,7 @@ def fetch_args():
     return res
 
 
-
+fetch_args()
 prn2pdf()
 backup_current_document()
 clean_plot_folder()
