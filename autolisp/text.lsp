@@ -19,6 +19,8 @@
     (setq MTextObj (vla-AddMText modelSpace corner width text))
     (vla-ZoomAll acadObj)
 )
+
+
 (defun c:read_file ()
   (setq fl (open "c:/tmp/table.txt" "r")
 	)

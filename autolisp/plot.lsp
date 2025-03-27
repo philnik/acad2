@@ -78,6 +78,12 @@
   (after-plot-hook pt)
   )
 
+(defun c:abpl ()
+  (setq pt (get2p))
+  (bp "Landscape" (car pt) (cadr pt))
+;  (after-plot-hook pt)
+  )
+
 
 (defun c:bpp ()
   (setq pt (get2p))
@@ -85,6 +91,14 @@
   (after-plot-hook pt)
   )
 ;;;;
+
+
+
+(defun c:abpp ()
+  (setq pt (get2p))
+  (bp "Portrait" (car pt) (cadr pt))
+;;  (after-plot-hook pt)
+  )
 
 
 (defun c:plotme ()

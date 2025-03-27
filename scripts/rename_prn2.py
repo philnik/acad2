@@ -51,7 +51,7 @@ def now_string():
 
 def backup_current_document(ns):
     if not(doc.path):
-        doc.Save()
+        doc.dest()
     dest_path = "C://Users//f.nikolakopoulos//AppData//Roaming//draw//plot//backup//"
     fsource = doc.path+doc.name
     fdest = dest_path+doc.name[:-4]+ '_' + ns + '.' + doc.name[-3:]
@@ -60,7 +60,7 @@ def backup_current_document(ns):
 
 ns = now_string()
 block.change_drawing_no(ns)
-res = fetch_args()
+#res = fetch_args()
 #block.change_attributes_on_region(res, ns)
 rename_prn_to_pdf(plot_folder)
 #prn2pdf()
