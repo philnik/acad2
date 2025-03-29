@@ -51,9 +51,9 @@ namespace SimpleComServer
         int a { get; set; }
         int b { get; set; }
 
-        string ReadFile(string path);
+        // string ReadFile(string path);
 
-        string[][] ReadCsv(string filepath);
+        object[] ReadCsv(string filepath);
         
     
 
@@ -70,7 +70,7 @@ namespace SimpleComServer
         public int b { get; set; }
 
 
-        public string[][] ReadCsv(string filePath)
+        public object[] ReadCsv(string filePath)
         {
             List<string[]> csvData = new List<string[]>();
 
@@ -92,8 +92,37 @@ namespace SimpleComServer
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
 
-            // Convert List<string[]> to a 2D array
-            return csvData.ToArray();
+           // Assuming the original array is string[][] (2D array of strings)
+            string[][] csvValues = csvData.ToArray();
+
+            // Convert it to an object array or Variant array as needed for COM
+            object[] comArray = new object[csvValues.Length];
+
+            for (int i = 0; i < csvValues.Length; i++)
+            {
+                comArray[i] = csvValues[i];  // This converts the row (string[]) into an object[]
+            }
+
+            return comArray;
+            // Now pass comArray to the COM server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
 
