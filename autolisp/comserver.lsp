@@ -43,4 +43,17 @@ sleep 10
  " 0)
 )
  
+ 
+ 
+
+;;; testing how to run 
+(defun c:newgreet ()
+  (vl-load-com)
+  (setq wsh (vlax-create-object "cad.python"))  ; Create Windows Shell object
+  (vlax-invoke wsh 'bpl)
+  ;;(vlax-release-object wsh)  ; Clean up
+  (princ "\make this")
+)
+
+
 

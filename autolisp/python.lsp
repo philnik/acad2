@@ -25,6 +25,49 @@
 
 
 ;;; testing how to run 
+(defun test_server2 (a b)
+  ;;;update to run the python  file silently
+  (vl-load-com)
+  (setq scc (vlax-create-object "SimpleComServer.Calculator"))  ; Create Windows Shell object
+  (setq mysum (vlax-invoke scc 'Add a b))
+  (vlax-release-object scc)  ; Clean up
+  
+  mysum
+  
+)
+
+
+;;; testing how to run 
+(defun test_server3 (a b)
+  ;;;update to run the python  file silently
+  (vl-load-com)
+  (setq scc (vlax-create-object "SimpleComServer.Calculator"))  ; Create Windows Shell object
+  (setq mysum (vlax-invoke scc 'GetNumbers))
+  (vlax-release-object scc)  ; Clean up
+  
+  mysum
+  
+)
+
+
+;;; testing how to run 
+(defun test_server4 ()
+  ;;;update to run the python  file silently
+  (vl-load-com)
+  (setq scc (vlax-create-object "SimpleComServer.Calculator"))  ; Create Windows Shell object
+  (setq mysum (vlax-invoke scc 'GetStrings))
+  (setq csum mysum)
+  (vlax-release-object scc)  ; Clean up
+  (setq scc nil)
+  csum
+  
+)
+
+(test_server4)
+
+
+
+;;; testing how to run 
 (defun c:rename_prn2 (pt)
   ;;;update to run the python  file silently
   ;; it does not load local packagers
