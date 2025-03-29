@@ -32,8 +32,8 @@ ac.InAdd()
 
 
 fpath =  r"C:\Users\filip\AppData\Roaming\python\cad2\draw\free\filters.py"
-
-my = ac.ReadFile(fpath)
+fpath = r"C:\Users\filip\AppData\Roaming\fem\elmer_fem\sound_test_again\navier_corridor2d\mesh.boundary"
+my = ac.ReadCsv(fpath)
 
 
 
