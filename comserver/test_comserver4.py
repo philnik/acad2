@@ -23,3 +23,5 @@ ac.GetDoubles()
 ac.GetStrings()
 
 ac.GetBools()
+
+ac.multiply(2,3)
