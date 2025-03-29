@@ -53,6 +53,9 @@ namespace SimpleComServer
 
         [DispId(5)]
         bool[] GetBools();
+
+        [DispId(6)]
+        int multiply(int a, int b);
     }
 
     [ComVisible(true)]
