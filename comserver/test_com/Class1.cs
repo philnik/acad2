@@ -54,14 +54,11 @@ namespace SimpleComServer
         // string ReadFile(string path);
 
         object[] ReadCsv(string filepath);
-        
-    
 
     }
 
     [ComVisible(true)]
     [Guid("227B0091-74EB-4F2F-8DDF-B0F9396ADE2D")]
-
     [ClassInterface(ClassInterfaceType.None)]
     [ProgId("SimpleComServer.Calculator")]
     public class ComCalculator : IComCalculator
@@ -69,6 +66,16 @@ namespace SimpleComServer
         public int a { get; set; }
         public int b { get; set; }
 
+	public string ReadFile(string filePath) {
+
+	    try {
+		    return File.ReadAllText(filePath);
+	    }
+	    catch (Exception ex)
+	    {
+		    Console.WriteLine($"An error occurred: {ex.Message}");
+		    return string.Empty;
+	}
 
         public object[] ReadCsv(string filePath)
         {
@@ -106,26 +113,12 @@ namespace SimpleComServer
             return comArray;
             // Now pass comArray to the COM server
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
 
+	public int divide(int a, int b) {
+	    return a/b;
+	}
 
 
 
