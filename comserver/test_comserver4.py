@@ -25,3 +25,15 @@ ac.GetStrings()
 ac.GetBools()
 
 ac.multiply(2,3)
+
+ac.a = 3
+ac.b = 5
+ac.InAdd()
+
+
+fpath =  r"C:\Users\filip\AppData\Roaming\python\cad2\draw\free\filters.py"
+
+my = ac.ReadFile(fpath)
+
+
+

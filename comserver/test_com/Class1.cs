@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.IO;
+using System.Net.Mime;
+
 
 // // {40E1DFFD-F972-4C5F-A529-D794190A6A26}
 // static const GUID <<name>> = 
@@ -35,27 +38,25 @@ namespace SimpleComServer
 {
     [ComVisible(true)]
     [Guid("923A488A-6BD2-4669-B3CF-0FACFF4064D8")]
-    [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     public interface IComCalculator
     {
-        [DispId(1)]
         int Add(int a, int b);
-
-
-        [DispId(2)]
         int[] GetNumbers();
-
-        [DispId(3)]
         string[] GetStrings();
-
-        [DispId(4)]
         double[] GetDoubles();
-
-        [DispId(5)]
         bool[] GetBools();
-
-        [DispId(6)]
         int multiply(int a, int b);
+        int InAdd();
+        int a { get; set; }
+        int b { get; set; }
+
+        string ReadFile(string path);
+
+        string[][] ReadCsv(string filepath);
+        
+    
+
     }
 
     [ComVisible(true)]
@@ -65,6 +66,44 @@ namespace SimpleComServer
     [ProgId("SimpleComServer.Calculator")]
     public class ComCalculator : IComCalculator
     {
+        public int a { get; set; }
+        public int b { get; set; }
+
+
+        public string[][] ReadCsv(string filePath)
+        {
+            List<string[]> csvData = new List<string[]>();
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        string line = reader.ReadLine();
+                        // Split the line by space and remove empty entries (multiple spaces will not result in empty strings)
+                        string[] fields = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        csvData.Add(fields);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+
+            // Convert List<string[]> to a 2D array
+            return csvData.ToArray();
+        }
+
+
+
+
+
+        public int InAdd()
+        {
+            return this.a + this.b;
+        }
         public int Add(int a, int b)
         {
             return a + b;
