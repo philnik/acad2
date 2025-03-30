@@ -38,7 +38,11 @@ fpath =  r"C:\Users\filip\AppData\Roaming\python\cad2\draw\free\filters.py"
 fpath = r"C:\Users\filip\AppData\Roaming\fem\elmer_fem\sound_test_again\navier_corridor2d\mesh.boundary"
 my = msh.ReadCsv(fpath)
 
+# returns int[,]
 mm = msh.ReadMesh(fpath)
+
+# return object
+mk = msh.ReadMeshBoundary(fpath)
 
 
 
