@@ -15,6 +15,9 @@ myc = "SimpleComServer.Calculator"
 myc = "SimpleComServer.Calculator"
 ac = win32com.client.Dispatch(myc)
 
+dispname = "SimpleComServer.MeshFile"
+msh = win32com.client.Dispatch(dispname)
+
 ac.Add(1,2)
 
 ac.GetNumbers()
@@ -33,7 +36,9 @@ ac.InAdd()
 
 fpath =  r"C:\Users\filip\AppData\Roaming\python\cad2\draw\free\filters.py"
 fpath = r"C:\Users\filip\AppData\Roaming\fem\elmer_fem\sound_test_again\navier_corridor2d\mesh.boundary"
-my = ac.ReadCsv(fpath)
+my = msh.ReadCsv(fpath)
+
+mm = msh.ReadMesh(fpath)
 
 
 

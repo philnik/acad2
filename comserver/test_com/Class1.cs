@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Net.Mime;
+using System.Dynamic;
 
 
 // // {40E1DFFD-F972-4C5F-A529-D794190A6A26}
@@ -53,7 +54,7 @@ namespace SimpleComServer
 
         // string ReadFile(string path);
 
-        object[] ReadCsv(string filepath);
+        // object[] ReadCsv(string filepath);
 
     }
 
@@ -66,59 +67,24 @@ namespace SimpleComServer
         public int a { get; set; }
         public int b { get; set; }
 
-	public string ReadFile(string filePath) {
-
-	    try {
-		    return File.ReadAllText(filePath);
-	    }
-	    catch (Exception ex)
-	    {
-		    Console.WriteLine($"An error occurred: {ex.Message}");
-		    return string.Empty;
-	}
-
-        public object[] ReadCsv(string filePath)
+        public string ReadFile(string filePath)
         {
-            List<string[]> csvData = new List<string[]>();
 
             try
             {
-                using (StreamReader reader = new StreamReader(filePath))
-                {
-                    while (!reader.EndOfStream)
-                    {
-                        string line = reader.ReadLine();
-                        // Split the line by space and remove empty entries (multiple spaces will not result in empty strings)
-                        string[] fields = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        csvData.Add(fields);
-                    }
-                }
+                return File.ReadAllText(filePath);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
+                return string.Empty;
             }
-
-           // Assuming the original array is string[][] (2D array of strings)
-            string[][] csvValues = csvData.ToArray();
-
-            // Convert it to an object array or Variant array as needed for COM
-            object[] comArray = new object[csvValues.Length];
-
-            for (int i = 0; i < csvValues.Length; i++)
-            {
-                comArray[i] = csvValues[i];  // This converts the row (string[]) into an object[]
-            }
-
-            return comArray;
-            // Now pass comArray to the COM server
-
         }
 
 
-	public int divide(int a, int b) {
-	    return a/b;
-	}
+	    public int divide(int a, int b) {
+	        return a/b;
+	    }
 
 
 

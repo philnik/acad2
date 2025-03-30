@@ -11,3 +11,4 @@ ac = win32com.client.Dispatch("PythonCOM.server")
 #ac = win32com.client.Dispatch("MyPythonCOM.Server")
 
 
+a++

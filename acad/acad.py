@@ -209,3 +209,6 @@ def change_dimensions_to_layer(adoc,layer_name):
     """
     adoc.SendCommand(command)
 
+
+
+    
