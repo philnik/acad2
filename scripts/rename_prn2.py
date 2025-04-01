@@ -10,10 +10,17 @@ import os
 sys.path.append("c:/Users/f.nikolakopoulos/AppDATA/Roaming/source/acad2/acad/")
 
 
+desktop_name = os.environ.get("COMPUTERNAME")
 
-from acad.rename import (rename_prn_to_pdf,
-                    rename_prn_to_pdf2,
-                    clean_plot_folder)
+if desktop_name == 'LENOVO':
+    from acad.rename import (rename_prn_to_pdf,
+                             rename_prn_to_pdf2,
+                             clean_plot_folder)
+else:
+    from rename import (rename_prn_to_pdf,
+                        rename_prn_to_pdf2,
+                        clean_plot_folder)
+    
 
 #import acad.block
 
@@ -27,6 +34,13 @@ def test_app_server():
     sharpapp.Init_acad()
     s = sharpapp
     sd = s.DocData()
+    return s
+
+try:
+    s = test_app_server()
+    gpp = s.GetPlotPath()
+except:
+    pass
 
 def get_plot_folder(doc):
     if doc:
