@@ -113,9 +113,9 @@ def move_old_files_to_folder(source_dir, target_dir, file_pattern):
 
         print(f"Files for title '{title}' moved. Latest file kept: {latest_file}")
 
-def clean_plot_folder():
-    source_dir = 'C:/Users/f.nikolakopoulos/AppData/Roaming/draw/plot/'
-    target_dir = 'C:/Users/f.nikolakopoulos/AppData/Roaming/draw/plot/sorted/'
+def clean_plot_folder(plot_path):
+    source_dir = plot_path
+    target_dir = plot_path + "/sorted/"
     file_pattern = r'.*_\d{12}\.pdf'  # Regex pattern for filenames like 
     move_old_files_to_folder(source_dir, target_dir, file_pattern)
 

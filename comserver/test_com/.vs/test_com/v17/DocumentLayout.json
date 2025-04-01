@@ -3,24 +3,25 @@
   "WorkspaceRootPath": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7182195A-3CC9-4191-90B7-E1CECEDA90AF}|test_com.csproj|c:\\users\\filip\\appdata\\roaming\\python\\acad2\\comserver\\test_com\\mesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7182195A-3CC9-4191-90B7-E1CECEDA90AF}|test_com.csproj|C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7182195A-3CC9-4191-90B7-E1CECEDA90AF}|test_com.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7182195A-3CC9-4191-90B7-E1CECEDA90AF}|test_com.csproj|C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\mesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7182195A-3CC9-4191-90B7-E1CECEDA90AF}|test_com.csproj|solutionrelative:mesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47545DFA-B2AF-48FD-A655-7E0AB27BB3AF}|..\\main1\\main1.csproj|c:\\users\\filip\\appdata\\roaming\\python\\acad2\\comserver\\main1\\main1.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7182195A-3CC9-4191-90B7-E1CECEDA90AF}|test_com.csproj|c:\\users\\filip\\appdata\\roaming\\python\\acad2\\comserver\\test_com\\bricscad_api.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7182195A-3CC9-4191-90B7-E1CECEDA90AF}|test_com.csproj|solutionrelative:bricscad_api.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|test_com||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{47545DFA-B2AF-48FD-A655-7E0AB27BB3AF}|..\\main1\\main1.csproj|c:\\users\\filip\\appdata\\roaming\\python\\acad2\\comserver\\main1\\main1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{47545DFA-B2AF-48FD-A655-7E0AB27BB3AF}|..\\main1\\main1.csproj|c:\\users\\filip\\appdata\\roaming\\python\\acad2\\comserver\\main1\\main1.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7182195A-3CC9-4191-90B7-E1CECEDA90AF}|test_com.csproj|C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7182195A-3CC9-4191-90B7-E1CECEDA90AF}|test_com.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7182195A-3CC9-4191-90B7-E1CECEDA90AF}|test_com.csproj|c:\\users\\filip\\appdata\\roaming\\python\\acad2\\comserver\\test_com\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|f8d6553f-f752-4dbf-acb6-f291b744a792"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +31,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,20 +39,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "main1",
+              "DocumentIndex": 3,
+              "Title": "bricscad_api.cs",
+              "DocumentMoniker": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\bricscad_api.cs",
+              "RelativeDocumentMoniker": "bricscad_api.cs",
+              "ToolTip": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\bricscad_api.cs",
+              "RelativeToolTip": "bricscad_api.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T21:04:28.361Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "main1.csproj",
               "DocumentMoniker": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\main1\\main1.csproj",
               "RelativeDocumentMoniker": "..\\main1\\main1.csproj",
               "ToolTip": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\main1\\main1.csproj",
               "RelativeToolTip": "..\\main1\\main1.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-03-30T09:01:19.014Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T09:01:19.014Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "main1",
               "DocumentMoniker": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\main1\\main1.csproj",
               "RelativeDocumentMoniker": "..\\main1\\main1.csproj",
@@ -63,40 +76,40 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Mesh.cs",
               "DocumentMoniker": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\Mesh.cs",
               "RelativeDocumentMoniker": "Mesh.cs",
               "ToolTip": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\Mesh.cs",
               "RelativeToolTip": "Mesh.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAowCIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-30T00:06:15.226Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\Class1.cs",
               "RelativeDocumentMoniker": "Class1.cs",
               "ToolTip": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\Class1.cs",
               "RelativeToolTip": "Class1.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAUwDAAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAiwGsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T01:45:30.224Z"
+              "WhenOpened": "2025-03-28T01:45:30.224Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "test_com",
               "DocumentMoniker": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\test_com.csproj",
               "RelativeDocumentMoniker": "test_com.csproj",
               "ToolTip": "C:\\Users\\filip\\AppData\\Roaming\\python\\acad2\\comserver\\test_com\\test_com.csproj",
               "RelativeToolTip": "test_com.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-03-28T01:46:20.001Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-28T01:46:20.001Z"
             },
             {
               "$type": "Bookmark",

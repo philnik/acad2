@@ -49,6 +49,9 @@ namespace SimpleComServer
         bool[] GetBools();
         int multiply(int a, int b);
         int InAdd();
+
+        float Divide2(float a, float b);
+
         int a { get; set; }
         int b { get; set; }
 
@@ -58,7 +61,7 @@ namespace SimpleComServer
 
     }
 
-    [ComVisible(true)]
+    [ComVisible(true)]  
     [Guid("227B0091-74EB-4F2F-8DDF-B0F9396ADE2D")]
     [ClassInterface(ClassInterfaceType.None)]
     [ProgId("SimpleComServer.Calculator")]
@@ -82,7 +85,7 @@ namespace SimpleComServer
         }
 
 
-	    public int divide(int a, int b) {
+	    public int Idivide(int a, int b) {
 	        return a/b;
 	    }
 
@@ -101,6 +104,14 @@ namespace SimpleComServer
         {
             return a * b;
         }
+
+
+        public float Divide2(float a, float b)
+        {
+            return a / b;
+        }
+
+
 
         public int[] GetNumbers()
         {
