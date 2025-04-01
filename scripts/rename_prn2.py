@@ -21,6 +21,12 @@ from acad.rename import (rename_prn_to_pdf,
 app = win32com.client.Dispatch("BricscadApp.AcadApplication")
 doc = app.ActiveDocument
 
+sharpapp = win32com.client.Dispatch("SimpleComServer.Brics2d")
+
+sharpapp.Init_acad()
+s = sharpapp
+sd = s.DocData()
+
 def get_plot_folder(doc):
     if doc:
         return doc.GetVariable("PlotOutputPath")
