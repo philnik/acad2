@@ -28,6 +28,9 @@ namespace SimpleComServer
         void Init_acad();
 
         string[] DocData();
+        string GetPlotPath();
+
+        string GetVar(string var);
 
     }
 
@@ -66,6 +69,18 @@ namespace SimpleComServer
             result[2] = doc.Path;
             return result;
         }
+
+        public string GetVar(string var)
+        {
+            return this.doc.GetVariable(var);
+        }
+
+        public string GetPlotPath()
+        {
+            return this.doc.GetVariable("PlotOutputPath");
+
+        }
+
 
     }
 
