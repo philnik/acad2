@@ -9,7 +9,7 @@ using System.Net.Mime;
 using System.Dynamic;
 using System.Xml.Linq;
 using BricscadDb;
-
+using BricscadApp;
 
 namespace SimpleComServer
 {
@@ -19,11 +19,15 @@ namespace SimpleComServer
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     public interface IBrics2d
     {
-       // object[] ReadCsv(string filepath);
+        // object[] ReadCsv(string filepath);
 
-       // object ReadMesh(string filepath);
+        // object ReadMesh(string filepath);
 
-       // int[,] ReadMeshBoundary(string filepath);
+        // int[,] ReadMeshBoundary(string filepath);
+
+        void Init_acad();
+
+        string[] DocData();
 
     }
 
@@ -35,7 +39,33 @@ namespace SimpleComServer
     [ProgId("SimpleComServer.Brics2d")]
     public class Brics2d : IBrics2d
     {
+        public BricscadApp.AcadApplication acad;
+        public BricscadApp.AcadDocument doc;
+        public BricscadDb.AcadModelSpace model;
 
+
+
+        public void Init_acad()
+        {
+            this.acad = (BricscadApp.AcadApplication)Marshal.GetActiveObject("BricscadApp.AcadApplication");
+            this.doc = acad.ActiveDocument;
+            this.model = doc.ModelSpace;
+        }
+
+
+        public string[]  DocData()
+        {
+            string name = doc.Name;
+            string fullname = doc.FullName;
+            string pathname = doc.Path;
+
+
+            string[] result = new string[3];
+            result[0] = doc.Name;
+            result[1] = doc.FullName;
+            result[2] = doc.Path;
+            return result;
+        }
 
     }
 
