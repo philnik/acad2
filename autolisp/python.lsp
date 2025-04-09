@@ -37,6 +37,25 @@
 )
 
 
+
+;;; testing how to run 
+(defun test_server2 ()
+  ;;;update to run the python  file silently
+  (vl-load-com)
+  (setq scc (vlax-create-object "SimpleComServer.Brics2d"))  ; Create Windows Shell object
+  (setq mysum (vlax-invoke scc 'Init_acad))
+  (setq mysum (vlax-invoke scc 'GetPlotPath))
+              
+  (vlax-release-object scc)  ; Clean up
+  (setq scc nil)
+  (gc)
+  mysum
+)
+  
+(test_server2)
+
+
+
 ;;; testing how to run 
 (defun test_server3 (a b)
   ;;;update to run the python  file silently
