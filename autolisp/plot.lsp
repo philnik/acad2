@@ -78,6 +78,14 @@
   (after-plot-hook pt)
   )
 
+(defun c:cpl ()
+  (setq pt (GetBlockCoords))
+  (bp "Landscape" (car pt) (cadr pt))
+  (after-plot-hook pt)
+  )
+
+
+
 (defun c:abpl ()
   (setq pt (get2p))
   (bp "Landscape" (car pt) (cadr pt))
