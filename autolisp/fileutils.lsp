@@ -27,16 +27,17 @@
 )
 
 (defun get-newest-file (folder ext)
-  (setq folder (vl-string-right-trim "\\" folder)) ; clean up folder path
+  ;;;still not works
+  (setq folder (vl-string-right-trim "\\" folder)) ; remove trailing slash
   (setq files '())
   (setq newest-file nil)
-  (setq newest-time 0)
+  (setq newest-time '(0 0 0 0 0 0 0 0)) ; earliest possible systime
 
-  ;; get all matching files
   (foreach file (vl-directory-files folder (strcat "*." ext) 1)
     (setq fullpath (strcat folder "\\" file))
     (setq filetime (vl-file-systime fullpath))
-    (if (> filetime newest-time)
+    ;; compare using greater-than for time list
+    (if (apply '> filetime newest-time)
       (progn
         (setq newest-time filetime)
         (setq newest-file fullpath)
@@ -45,6 +46,8 @@
   )
   newest-file
 )
+
+
 
 (defun get-print-file ()
   (get-newest-file "C://temp//plot" "prn"))
