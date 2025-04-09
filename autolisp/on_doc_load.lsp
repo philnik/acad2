@@ -3,8 +3,9 @@
 
 
 (defun c:reload0 ()
-                                        ;  (load "on_doc_load.lsp")
+  (load "on_doc_load.lsp")
   (load "python.lsp")
+  (load "create_block.lsp")
   (load "parametric.lsp")
   (load "textstyles.lsp")
   (load "setlayers.lsp")
@@ -14,12 +15,13 @@
   (load "plot.lsp")
   (load "comserver.lsp")
   (load "merge.lsp")
-  (load "log.lsp")
+
   (load "colors.lsp")
+  (load "log.lsp")
 
 )
 
-(c:reload0)
+;;;(c:reload0)
 
 (defun c:mktmpl ()
   (C:addstyles) ;; from text styles
