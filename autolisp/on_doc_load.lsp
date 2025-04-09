@@ -4,6 +4,7 @@
 
 (defun c:reload0 ()
   (load "on_doc_load.lsp")
+  (load "fileutils.lsp")
   (load "python.lsp")
   (load "create_block.lsp")
   (load "parametric.lsp")
