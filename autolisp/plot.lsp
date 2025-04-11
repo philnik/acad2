@@ -1,7 +1,7 @@
 "load autolisp plot file"
 
 (defun after-plot-hook (pt)
-  (c:rename_prn_home pt)
+  (c:rename_prn2 pt)
   )
 
 ;;;plot pdf extensions
