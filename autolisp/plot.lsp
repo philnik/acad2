@@ -4,6 +4,15 @@
   (c:rename_prn2 pt)
   )
 
+
+(defun after-plot-hook-0 (pt)
+  ;;;called from block
+  ;;;send to fileutis.lsp
+  (rename_plot_file pt)
+  )
+
+
+
 ;;;plot pdf extensions
 (defun bt (orientation window)
   (command "-PLOT"
@@ -78,10 +87,15 @@
   (after-plot-hook pt)
   )
 
-(defun c:cpl ()
-  (setq pt (GetBlockCoords))
+(defun c:bcpl ()
+  (setq ret (GetBlockCoords))
+  (setq pt (cadr ret))
+  (setq entobj (car ret))
+  (setq now (get-datetime-now))
+  (SET-BLOCK-DATE entobj)
   (bp "Landscape" (car pt) (cadr pt))
-  (after-plot-hook pt)
+  (rename_plot_file entobj)
+  
   )
 
 

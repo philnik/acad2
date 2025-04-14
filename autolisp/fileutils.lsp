@@ -1,12 +1,25 @@
 
 
-(setq wpath "c:/temp/")
+(setq wpath "c://temp//")
+(setq wpath "c://draw//plot//")
 
 
 
 (defun get-datetime-now ()
   (remove-dots (rtos (getvar "CDATE") 2 6))
 )
+
+(defun get-date ()
+  ;;;20250414160659
+  ;;;12345678__
+  (setq cdate (get-datetime-now))
+  (setq YY (substr cdate 3 2))
+  (setq MM (substr cdate 5 2))
+  (setq DD (substr cdate 7 2))
+  (strcat DD "." MM "." YY)
+)
+
+
 
 (defun get-document-title ()
   (setq full (vlax-get-property (vla-get-ActiveDocument (vlax-get-Acad-Object)) 'Name))
@@ -47,10 +60,8 @@
   newest-file
 )
 
-
-
 (defun get-print-file ()
-  (get-newest-file "C://temp//plot" "prn"))
+  (get-newest-file wpath "prn"))
 
 
 
@@ -60,4 +71,10 @@
   (vl-file-copy (get-current-drawing-path) full-name)
 )
 
+(defun rename_plot_file ()
+  (
+    (setq doc_title (get-document-title))
+    
+  )
+  
 

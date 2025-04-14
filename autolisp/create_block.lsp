@@ -11,7 +11,7 @@
           (setq maxPt (vlax-safearray->list maxPt))
           (princ (strcat "\nMin Coord: " (vl-prin1-to-string minPt)))
           (princ (strcat "\nMax Coord: " (vl-prin1-to-string maxPt)))
-	  (list minPt MaxPt)
+	  (list entObj (list minPt MaxPt))
         )
         (princ "\nSelected entity is not a block reference.")
       )
@@ -19,7 +19,7 @@
     (princ "\nNo entity selected.")
   )
   (princ)
-  (list minPt MaxPt)
+  (list entObj (list minPt MaxPt))
 )
 
 
@@ -27,4 +27,62 @@
 (defun c:GetBlockCoords ()
   (GetBlockCoords)
 )
+
+
+(defun c:cav (/ ent obj tag newval)
+  (setq ent (car (entsel "\nSelect block: ")))
+  (setq obj (vlax-ename->vla-object ent))
+  (setq tag1 "DRAWINGNO")            ;; <-- Replace with your actual tag
+  (setq val1 (get-datetime-now))
+  
+  (setq tag2 "DATE")            ;; <-- Replace with your actual tag
+  (setq val2 (get-date))   
+
+  (if (and obj (= (vla-get-hasattributes obj) :vlax-true))
+    (foreach att (vlax-invoke obj 'GetAttributes)
+      (setq attstring (strcase (vla-get-tagstring att)))
+     
+      (cond 
+        ((eq attstring (strcase tag1))
+         (vla-put-textstring att val1)
+        )
+        
+        ((eq attstring (strcase tag2))
+         (vla-put-textstring att val2)
+        )
+    )
+  ) 
+  )
+  (princ)
+)
+
+
+
+(defun set-block-date (obj)
+  ;;(setq ent (car (entsel "\nSelect block: ")))
+  ;;(setq obj (vlax-ename->vla-object ent))
+  (setq tag1 "DRAWINGNO")            ;; <-- Replace with your actual tag
+  (setq val1 (get-datetime-now))
+  
+  (setq tag2 "DATE")            ;; <-- Replace with your actual tag
+  (setq val2 (get-date))   
+
+  (if (and obj (= (vla-get-hasattributes obj) :vlax-true))
+    (foreach att (vlax-invoke obj 'GetAttributes)
+      (setq attstring (strcase (vla-get-tagstring att)))
+     
+      (cond 
+        ((eq attstring (strcase tag1))
+         (vla-put-textstring att val1)
+        )
+        
+        ((eq attstring (strcase tag2))
+         (vla-put-textstring att val2)
+        )
+    )
+  ) 
+  )
+  (princ)
+)
+
 
