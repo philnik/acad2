@@ -1,4 +1,10 @@
-(setq fname_nodes "C:/Users/filip/AppData/Roaming/fem/elmer_fem/sound_test_again/sound2/mesh.nodes")
+
+
+
+(setq msh_dir "C:/Users/filip/AppData/Roaming/fem/elmer_fem/acoustic_box/acoustic_box/")
+(setq fname_nodes (strcat msh_dir "mesh.nodes"))
+(setq filename1 (strcat msh_dir "mesh.elements"))
+(setq filename2 (strcat msh_dir "mesh.boundary"))
 
 
 (defun read-coordinates (fname)
@@ -30,10 +36,6 @@
 
 (setq coord-list (read-coordinates fname_nodes))
 
-
-(setq filename1 "C:/Users/filip/AppData/Roaming/fem/elmer_fem/sound_test_again/sound2/mesh.elements")
-
-(setq filename2 "C:/Users/filip/AppData/Roaming/fem/elmer_fem/sound_test_again/sound2/mesh.boundary")
 
 ;;;0 1  2   3    4   5
 ;;;1 1 303 5011 6252 6254

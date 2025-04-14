@@ -37,31 +37,41 @@
   (vl-file-copy (get-current-drawing-path) new-path)
 )
 
-(defun get-newest-file (folder ext)
+(defun multi (list1)
+  (progn
+    (setq coeff '(1e8 1e7 1e6 1e5 1e4 1e3 1e2 1e1)) 
+    (setq test2 (mapcar (lambda (a b) (* a b)) list1 coeff))
+    (setq test3 (apply '+ test2))
+    test3))
+
+(defun get-newest-prn-file (folder ext)
   ;;;still not works
-  (setq folder (vl-string-right-trim "\\" folder)) ; remove trailing slash
+  (setq folder (vl-string-right-trim "//" folder)) ; remove trailing slash
   (setq files '())
   (setq newest-file nil)
-  (setq newest-time '(0 0 0 0 0 0 0 0)) ; earliest possible systime
+  (setq newest-time 0) ; earliest possible systime
 
+  (setq ns
   (foreach file (vl-directory-files folder (strcat "*." ext) 1)
-    (setq fullpath (strcat folder "\\" file))
-    (setq filetime (vl-file-systime fullpath))
+    (setq fullpath (strcat folder "//" file))
+    (setq ft (vl-file-systime fullpath))
+    (setq filetime (multi ft))
     ;; compare using greater-than for time list
-    (if (apply '> filetime newest-time)
+    (if (> filetime newest-time)
       (progn
         (setq newest-time filetime)
         (setq newest-file fullpath)
+        newest-file
       )
     )
-  )
-  newest-file
+  ))
+  ns
 )
 
 (defun get-print-file ()
-  (get-newest-file wpath "prn"))
+  (get-newest-prn-file wpath "prn"))
 
-
+(setq abc (get-print-file))
 
 
 (defun backup-file ()
@@ -69,10 +79,19 @@
   (vl-file-copy (get-current-drawing-path) full-name)
 )
 
-(defun rename_plot_file ()
-  (
+(defun rename_plot_file (ENTOBJ)
+  (PROGN
     (setq doc_title (get-document-title))
+    (setq block-date (get-block-tag ENTOBJ "DRAWINGNO"))
+    (if (not block-date)
+      (setq block-date (get-datetime-now))
+    )
+    (setq export_pdf_name (strcat wpath doc_title "_" block-date ".pdf"))
+    (setq export_dwg_name (strcat wpath doc_title "_" block-date ".dwg"))
+    (vl-file-copy (get-print-file) export_pdf_name)
+    (vl-file-copy (get-current-drawing-path) export_dwg_name)
     
   )
+)
   
 

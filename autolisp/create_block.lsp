@@ -85,4 +85,30 @@
   (princ)
 )
 
+(defun get-block-tag (obj tag)
+  ;;(setq tag "DRAWINGNO")
 
+  (progn  
+    (setq ret nil)
+    ( if (and obj (= (vla-get-hasattributes obj) :vlax-true))
+      (foreach att (vlax-invoke obj 'GetAttributes)
+        (setq attstring (strcase (vla-get-tagstring att)))
+     
+        (if (eq attstring (strcase tag))
+         (setq ret (vla-get-textstring att))
+        )
+      ))
+    ret)
+)
+
+(defun c:get-block-date ()
+  (progn
+    (setq tag "DRAWINGNO")
+    (setq ent (car (entsel "\nSelect block: ")))
+    (setq obj (vlax-ename->vla-object ent))
+    (get-block-tag obj tag)
+  ))
+    
+        
+        
+        
