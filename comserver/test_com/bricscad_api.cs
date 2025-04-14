@@ -10,7 +10,7 @@ using System.Dynamic;
 using System.Xml.Linq;
 using BricscadDb;
 using BricscadApp;
-using Bricscad
+//using Bricscad;
 
 namespace SimpleComServer
 {

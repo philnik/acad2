@@ -1,4 +1,8 @@
+SHELL := /bin/bash
 
+clean:
+	@find . -type f -name '\#*' -exec rm -f  {} \;
+	@find . -type f -name '*~' -exec rm -f  {} \;
 
 
 build: pyproject.toml

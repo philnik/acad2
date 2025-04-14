@@ -1,5 +1,3 @@
-
-
 (setq wpath "c://temp//")
 (setq wpath "c://draw//plot//")
 
